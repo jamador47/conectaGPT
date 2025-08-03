@@ -51,6 +51,7 @@ import marketplacesApi from '@/api/marketplaces'
 import useApi from '@/hooks/useApi'
 import useConfirm from '@/hooks/useConfirm'
 import { useAuth } from '@/hooks/useAuth'
+import { useTranslation } from '@/hooks/useTranslation'
 
 // Utils
 import useNotifier from '@/utils/useNotifier'
@@ -77,6 +78,7 @@ const Marketplace = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     useNotifier()
+    const { t } = useTranslation()
 
     const theme = useTheme()
     const { error, setError } = useError()
@@ -117,12 +119,12 @@ const Marketplace = () => {
     const share = (template) => {
         const dialogProps = {
             type: 'EDIT',
-            cancelButtonName: 'Cancel',
-            confirmButtonName: 'Share',
+            cancelButtonName: t('buttons.cancel'),
+            confirmButtonName: t('marketplace.share'),
             data: {
                 id: template.id,
                 name: template.name,
-                title: 'Share Custom Template',
+                title: t('marketplace.share_custom_template'),
                 itemType: 'custom_template'
             }
         }
@@ -485,7 +487,7 @@ const Marketplace = () => {
                                         }}
                                     >
                                         <InputLabel size='small' id='filter-badge-label'>
-                                            Tag
+                                            {t('marketplace.tag')}
                                         </InputLabel>
                                         <Select
                                             labelId='filter-badge-label'
@@ -494,7 +496,7 @@ const Marketplace = () => {
                                             multiple
                                             value={badgeFilter}
                                             onChange={handleBadgeFilterChange}
-                                            input={<OutlinedInput label='Tag' />}
+                                            input={<OutlinedInput label={t('marketplace.tag')} />}
                                             renderValue={(selected) => selected.join(', ')}
                                             MenuProps={MenuProps}
                                             sx={getSelectStyles(theme.palette.grey[900] + 25, theme?.customization?.isDarkMode)}
@@ -521,7 +523,7 @@ const Marketplace = () => {
                                         }}
                                     >
                                         <InputLabel size='small' id='type-badge-label'>
-                                            Type
+                                            {t('marketplace.type')}
                                         </InputLabel>
                                         <Select
                                             size='small'
@@ -530,7 +532,7 @@ const Marketplace = () => {
                                             multiple
                                             value={typeFilter}
                                             onChange={handleTypeFilterChange}
-                                            input={<OutlinedInput label='Type' />}
+                                            input={<OutlinedInput label={t('marketplace.type')} />}
                                             renderValue={(selected) => selected.join(', ')}
                                             MenuProps={MenuProps}
                                             sx={getSelectStyles(theme.palette.grey[900] + 25, theme?.customization?.isDarkMode)}
@@ -587,9 +589,9 @@ const Marketplace = () => {
                             }
                             onSearchChange={onSearchChange}
                             search={true}
-                            searchPlaceholder='Search Name/Description/Node'
-                            title='Marketplace'
-                            description='Explore and use pre-built templates'
+                            searchPlaceholder={t('marketplace.search_placeholder')}
+                            title={t('marketplace.title')}
+                            description={t('marketplace.subtitle')}
                         >
                             <ToggleButtonGroup
                                 sx={{ borderRadius: 2, height: '100%' }}
@@ -606,7 +608,7 @@ const Marketplace = () => {
                                     }}
                                     variant='contained'
                                     value='card'
-                                    title='Card View'
+                                    title={t('marketplace.card_view')}
                                 >
                                     <IconLayoutGrid />
                                 </ToggleButton>
@@ -618,7 +620,7 @@ const Marketplace = () => {
                                     }}
                                     variant='contained'
                                     value='list'
-                                    title='List View'
+                                    title={t('marketplace.list_view')}
                                 >
                                     <IconList />
                                 </ToggleButton>
@@ -627,8 +629,8 @@ const Marketplace = () => {
                         {hasPermission('templates:marketplace') && hasPermission('templates:custom') && (
                             <Stack direction='row' justifyContent='space-between' sx={{ mb: 2 }}>
                                 <Tabs value={activeTabValue} onChange={handleTabChange} textColor='primary' aria-label='tabs'>
-                                    <PermissionTab permissionId='templates:marketplace' value={0} label='Community Templates' />
-                                    <PermissionTab permissionId='templates:custom' value={1} label='My Templates' />
+                                    <PermissionTab permissionId='templates:marketplace' value={0} label={t('marketplace.community_templates')} />
+                                    <PermissionTab permissionId='templates:custom' value={1} label={t('marketplace.my_templates')} />
                                 </Tabs>
                                 <Autocomplete
                                     id='useCases'

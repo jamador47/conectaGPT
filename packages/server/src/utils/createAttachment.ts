@@ -9,7 +9,7 @@ import {
     removeSpecificFileFromUpload,
     isValidUUID,
     isPathTraversal
-} from 'flowise-components'
+} from 'conectagpt-components'
 import { getRunningExpressApp } from './getRunningExpressApp'
 import { getErrorMessage } from '../errors/utils'
 import { checkStorage, updateStorageUsage } from './quotaUsage'

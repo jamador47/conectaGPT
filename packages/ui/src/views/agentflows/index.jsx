@@ -22,6 +22,7 @@ import chatflowsApi from '@/api/chatflows'
 
 // Hooks
 import useApi from '@/hooks/useApi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 // const
 import { baseURL, AGENTFLOW_ICONS } from '@/store/constant'
@@ -35,6 +36,7 @@ import { IconPlus, IconLayoutGrid, IconList } from '@tabler/icons-react'
 const Agentflows = () => {
     const navigate = useNavigate()
     const theme = useTheme()
+    const { t } = useTranslation()
 
     const [isLoading, setLoading] = useState(true)
     const [images, setImages] = useState({})
@@ -170,9 +172,9 @@ const Agentflows = () => {
                     <ViewHeader
                         onSearchChange={onSearchChange}
                         search={true}
-                        searchPlaceholder='Search Name or Category'
-                        title='Agentflows'
-                        description='Multi-agent systems, workflow orchestration'
+                        searchPlaceholder={t('agentflows.search_placeholder')}
+                        title={t('agentflows.title')}
+                        description={t('agentflows.subtitle')}
                     >
                         <ToggleButtonGroup
                             sx={{ borderRadius: 2, maxHeight: 40 }}
@@ -191,7 +193,7 @@ const Agentflows = () => {
                                 value='v2'
                                 title='V2'
                             >
-                                <Chip sx={{ mr: 1 }} label='NEW' size='small' color='primary' />
+                                <Chip sx={{ mr: 1 }} label={t('agentflows.new')} size='small' color='primary' />
                                 V2
                             </ToggleButton>
                             <ToggleButton
@@ -223,7 +225,7 @@ const Agentflows = () => {
                                 }}
                                 variant='contained'
                                 value='card'
-                                title='Card View'
+                                title={t('agentflows.card_view')}
                             >
                                 <IconLayoutGrid />
                             </ToggleButton>
@@ -235,7 +237,7 @@ const Agentflows = () => {
                                 }}
                                 variant='contained'
                                 value='list'
-                                title='List View'
+                                title={t('agentflows.list_view')}
                             >
                                 <IconList />
                             </ToggleButton>
@@ -247,7 +249,7 @@ const Agentflows = () => {
                             startIcon={<IconPlus />}
                             sx={{ borderRadius: 2, height: 40 }}
                         >
-                            Add New
+                            {t('agentflows.add_new')}
                         </StyledPermissionButton>
                     </ViewHeader>
                     {!isLoading && total > 0 && (
@@ -291,7 +293,7 @@ const Agentflows = () => {
                                     alt='AgentsEmptySVG'
                                 />
                             </Box>
-                            <div>No Agents Yet</div>
+                            <div>{t('agentflows.empty_state')}</div>
                         </Stack>
                     )}
                 </Stack>

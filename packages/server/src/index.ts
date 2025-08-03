@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express'
 import path from 'path'
+import fs from 'fs'
 import cors from 'cors'
 import http from 'http'
 import cookieParser from 'cookie-parser'
@@ -326,15 +327,27 @@ export class App {
         // Serve UI static
         // ----------------------------------------
 
-        const packagePath = getNodeModulesPackagePath('flowise-ui')
-        const uiBuildPath = path.join(packagePath, 'build')
-        const uiHtmlPath = path.join(packagePath, 'build', 'index.html')
+        const uiBuildPath = path.join(__dirname, '..', '..', 'ui', 'build')
+        const uiHtmlPath = path.join(__dirname, '..', '..', 'ui', 'build', 'index.html')
+
+        // Check if build paths exist
+        if (!fs.existsSync(uiBuildPath)) {
+            logger.error(`❌ [server]: UI build path not found: ${uiBuildPath}. Please run 'pnpm build' in the UI package.`)
+        }
+
+        if (!fs.existsSync(uiHtmlPath)) {
+            logger.error(`❌ [server]: UI index.html not found: ${uiHtmlPath}. Please run 'pnpm build' in the UI package.`)
+        }
 
         this.app.use('/', express.static(uiBuildPath))
 
         // All other requests not handled will return React app
         this.app.use((req: Request, res: Response) => {
-            res.sendFile(uiHtmlPath)
+            if (fs.existsSync(uiHtmlPath)) {
+                res.sendFile(uiHtmlPath)
+            } else {
+                res.status(500).send('UI build not found. Please run "pnpm build" in the UI package.')
+            }
         })
 
         // Error handling

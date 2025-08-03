@@ -20,6 +20,7 @@ import toolsApi from '@/api/tools'
 // Hooks
 import useApi from '@/hooks/useApi'
 import { useError } from '@/store/context/ErrorContext'
+import { useTranslation } from '@/hooks/useTranslation'
 import { gridSpacing } from '@/store/constant'
 
 // icons
@@ -30,6 +31,7 @@ import ToolEmptySVG from '@/assets/images/tools_empty.svg'
 
 const Tools = () => {
     const theme = useTheme()
+    const { t } = useTranslation()
     const getAllToolsApi = useApi(toolsApi.getAllTools)
     const { error, setError } = useError()
 
@@ -68,10 +70,10 @@ const Tools = () => {
     const onUploadFile = (file) => {
         try {
             const dialogProp = {
-                title: 'Add New Tool',
+                title: t('tools.add_new_tool'),
                 type: 'IMPORT',
-                cancelButtonName: 'Cancel',
-                confirmButtonName: 'Save',
+                cancelButtonName: t('buttons.cancel'),
+                confirmButtonName: t('buttons.save'),
                 data: JSON.parse(file)
             }
             setDialogProps(dialogProp)
@@ -99,10 +101,10 @@ const Tools = () => {
 
     const addNew = () => {
         const dialogProp = {
-            title: 'Add New Tool',
+            title: t('tools.add_new_tool'),
             type: 'ADD',
-            cancelButtonName: 'Cancel',
-            confirmButtonName: 'Add'
+            cancelButtonName: t('buttons.cancel'),
+            confirmButtonName: t('buttons.add')
         }
         setDialogProps(dialogProp)
         setShowDialog(true)
@@ -110,10 +112,10 @@ const Tools = () => {
 
     const edit = (selectedTool) => {
         const dialogProp = {
-            title: 'Edit Tool',
+            title: t('tools.edit_tool'),
             type: 'EDIT',
-            cancelButtonName: 'Cancel',
-            confirmButtonName: 'Save',
+            cancelButtonName: t('buttons.cancel'),
+            confirmButtonName: t('buttons.save'),
             data: selectedTool
         }
         setDialogProps(dialogProp)
@@ -161,9 +163,9 @@ const Tools = () => {
                         <ViewHeader
                             onSearchChange={onSearchChange}
                             search={true}
-                            searchPlaceholder='Search Tools'
-                            title='Tools'
-                            description='External functions or APIs the agent can use to take action'
+                            searchPlaceholder={t('tools.search_placeholder')}
+                            title={t('tools.title')}
+                            description={t('tools.subtitle')}
                         >
                             <ToggleButtonGroup
                                 sx={{ borderRadius: 2, maxHeight: 40 }}
@@ -181,7 +183,7 @@ const Tools = () => {
                                     }}
                                     variant='contained'
                                     value='card'
-                                    title='Card View'
+                                    title={t('tools.card_view')}
                                 >
                                     <IconLayoutGrid />
                                 </ToggleButton>
@@ -193,7 +195,7 @@ const Tools = () => {
                                     }}
                                     variant='contained'
                                     value='list'
-                                    title='List View'
+                                    title={t('tools.list_view')}
                                 >
                                     <IconList />
                                 </ToggleButton>
@@ -206,7 +208,7 @@ const Tools = () => {
                                     startIcon={<IconFileUpload />}
                                     sx={{ borderRadius: 2, height: 40 }}
                                 >
-                                    Load
+                                    {t('tools.load_tool')}
                                 </PermissionButton>
                                 <input
                                     style={{ display: 'none' }}
@@ -225,7 +227,7 @@ const Tools = () => {
                                     startIcon={<IconPlus />}
                                     sx={{ borderRadius: 2, height: 40 }}
                                 >
-                                    Create
+                                    {t('tools.create_tool')}
                                 </StyledPermissionButton>
                             </ButtonGroup>
                         </ViewHeader>
@@ -260,7 +262,7 @@ const Tools = () => {
                                         alt='ToolEmptySVG'
                                     />
                                 </Box>
-                                <div>No Tools Created Yet</div>
+                                <div>{t('tools.empty_state')}</div>
                             </Stack>
                         )}
                     </Stack>

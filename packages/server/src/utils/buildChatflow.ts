@@ -17,7 +17,7 @@ import {
     removeSpecificFileFromUpload,
     EvaluationRunner,
     handleEscapeCharacters
-} from 'flowise-components'
+} from 'conectagpt-components'
 import { StatusCodes } from 'http-status-codes'
 import {
     IncomingInput,

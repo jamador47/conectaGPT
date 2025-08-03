@@ -12,7 +12,7 @@ import {
     IServerSideEventStreamer,
     convertChatHistoryToText,
     generateFollowUpPrompts
-} from 'flowise-components'
+} from 'conectagpt-components'
 import {
     IncomingAgentflowInput,
     INodeData,

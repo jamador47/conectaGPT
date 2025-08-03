@@ -1,11 +1,11 @@
 {
-    "name": "flowise-ui",
+    "name": "conectagpt-ui",
     "version": "3.0.4",
     "license": "SEE LICENSE IN LICENSE.md",
-    "homepage": "https://flowiseai.com",
+    "homepage": "https://conectagpt.com",
     "author": {
-        "name": "HenryHeng",
-        "email": "henryheng@flowiseai.com"
+        "name": "ConectaGPT Team",
+        "email": "info@conectagpt.com"
     },
     "dependencies": {
         "@codemirror/lang-javascript": "^6.2.1",
@@ -72,7 +72,10 @@
         "showdown": "^2.1.0",
         "tippy.js": "^6.3.7",
         "uuid": "^9.0.1",
-        "yup": "^0.32.9"
+        "yup": "^0.32.9",
+        "react-i18next": "^13.5.0",
+        "i18next": "^23.7.6",
+        "i18next-browser-languagedetector": "^7.2.0"
     },
     "scripts": {
         "dev": "vite",

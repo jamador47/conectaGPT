@@ -12,42 +12,43 @@ import Leads from '@/ui-component/extended/Leads'
 import FollowUpPrompts from '@/ui-component/extended/FollowUpPrompts'
 import FileUpload from '@/ui-component/extended/FileUpload'
 import PostProcessing from '@/ui-component/extended/PostProcessing'
+import { useTranslation } from '@/hooks/useTranslation'
 
-const CHATFLOW_CONFIGURATION_TABS = [
+const getChatflowConfigurationTabs = (t) => [
     {
-        label: 'Security',
+        label: t('configuration.security'),
         id: 'security'
     },
     {
-        label: 'Starter Prompts',
+        label: t('configuration.starter_prompts'),
         id: 'conversationStarters'
     },
     {
-        label: 'Follow-up Prompts',
+        label: t('configuration.follow_up_prompts'),
         id: 'followUpPrompts'
     },
     {
-        label: 'Speech to Text',
+        label: t('configuration.speech_to_text'),
         id: 'speechToText'
     },
     {
-        label: 'Chat Feedback',
+        label: t('configuration.chat_feedback'),
         id: 'chatFeedback'
     },
     {
-        label: 'Analyse Chatflow',
+        label: t('configuration.analyse_chatflow'),
         id: 'analyseChatflow'
     },
     {
-        label: 'Leads',
+        label: t('configuration.leads'),
         id: 'leads'
     },
     {
-        label: 'File Upload',
+        label: t('configuration.file_upload'),
         id: 'fileUpload'
     },
     {
-        label: 'Post Processing',
+        label: t('configuration.post_processing'),
         id: 'postProcessing',
         hideInAgentFlow: true
     }
@@ -84,9 +85,10 @@ function a11yProps(index) {
 
 const ChatflowConfigurationDialog = ({ show, isAgentCanvas, dialogProps, onCancel }) => {
     const portalElement = document.getElementById('portal')
+    const { t } = useTranslation()
     const [tabValue, setTabValue] = useState(0)
 
-    const filteredTabs = CHATFLOW_CONFIGURATION_TABS.filter((tab) => !isAgentCanvas || !tab.hideInAgentFlow)
+    const filteredTabs = getChatflowConfigurationTabs(t).filter((tab) => !isAgentCanvas || !tab.hideInAgentFlow)
 
     const component = show ? (
         <Dialog

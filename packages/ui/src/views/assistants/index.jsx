@@ -9,27 +9,30 @@ import { useTheme, styled } from '@mui/material/styles'
 import MainCard from '@/ui-component/cards/MainCard'
 import ViewHeader from '@/layout/MainLayout/ViewHeader'
 
+// Hooks
+import { useTranslation } from '@/hooks/useTranslation'
+
 // icons
 import { IconRobotFace, IconBrandOpenai, IconBrandAzure } from '@tabler/icons-react'
 
-const cards = [
+const getCards = (t) => [
     {
-        title: 'Custom Assistant',
-        description: 'Create custom assistant using your choice of LLMs',
+        title: t('assistants.custom_assistant'),
+        description: t('assistants.custom_description'),
         icon: <IconRobotFace />,
-        iconText: 'Custom',
+        iconText: t('assistants.custom'),
         gradient: 'linear-gradient(135deg, #fff8e14e 0%, #ffcc802f 100%)'
     },
     {
-        title: 'OpenAI Assistant',
-        description: 'Create assistant using OpenAI Assistant API',
+        title: t('assistants.openai_assistant'),
+        description: t('assistants.openai_description'),
         icon: <IconBrandOpenai />,
         iconText: 'OpenAI',
         gradient: 'linear-gradient(135deg, #c9ffd85f 0%, #a0f0b567 100%)'
     },
     {
-        title: 'Azure Assistant (Coming Soon)',
-        description: 'Create assistant using Azure Assistant API',
+        title: t('assistants.azure_assistant'),
+        description: t('assistants.azure_description'),
         icon: <IconBrandAzure />,
         iconText: 'Azure',
         gradient: 'linear-gradient(135deg, #c4e1ff57 0%, #80b7ff5a 100%)'
@@ -61,12 +64,13 @@ const FeatureIcon = styled('div')(() => ({
 const FeatureCards = () => {
     const navigate = useNavigate()
     const theme = useTheme()
+    const { t } = useTranslation()
     const customization = useSelector((state) => state.customization)
 
     const onCardClick = (index) => {
         if (index === 0) navigate('/assistants/custom')
         if (index === 1) navigate('/assistants/openai')
-        if (index === 2) alert('Under Development')
+        if (index === 2) alert(t('assistants.under_development'))
     }
 
     return (
@@ -78,7 +82,7 @@ const FeatureCards = () => {
                 justifyContent: 'space-between'
             }}
         >
-            {cards.map((card, index) => (
+            {getCards(t).map((card, index) => (
                 <StyledCard
                     key={index}
                     gradient={card.gradient}
@@ -118,13 +122,15 @@ const FeatureCards = () => {
 // ==============================|| ASSISTANTS ||============================== //
 
 const Assistants = () => {
+    const { t } = useTranslation()
+    
     return (
         <>
             <MainCard>
                 <Stack flexDirection='column' sx={{ gap: 3 }}>
                     <ViewHeader
-                        title='Assistants'
-                        description='Chat assistants with instructions, tools, and files to respond to user queries'
+                        title={t('assistants.title')}
+                        description={t('assistants.subtitle')}
                     />
                     <FeatureCards />
                 </Stack>

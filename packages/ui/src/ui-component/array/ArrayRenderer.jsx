@@ -9,11 +9,13 @@ import DocStoreInputHandler from '@/views/docstore/DocStoreInputHandler'
 import { showHideInputs } from '@/utils/genericHelper'
 import { cloneDeep } from 'lodash'
 import { flowContext } from '@/store/context/ReactFlowContext'
+import { useTranslation } from '@/hooks/useTranslation'
 
 export const ArrayRenderer = ({ inputParam, data, disabled, isDocStore = false }) => {
     const [arrayItems, setArrayItems] = useState([]) // these are the actual values. Ex: [{name: 'John', age: 30}, {name: 'Jane', age: 25}]
     const [itemParameters, setItemParameters] = useState([]) // these are the input parameters for each array item. Ex: [{label: 'Name', type: 'string', display: true}, {label: 'age', type: 'number', display: false}]
     const theme = useTheme()
+    const { t } = useTranslation()
     const customization = useSelector((state) => state.customization)
     const flowContextValue = useContext(flowContext)
     const { reactFlowInstance } = flowContextValue || {}
@@ -201,7 +203,7 @@ export const ArrayRenderer = ({ inputParam, data, disabled, isDocStore = false }
                         {/* Delete button for array item */}
                         {isDeleteButtonVisible && (
                             <IconButton
-                                title='Delete'
+                                title={t('buttons.delete')}
                                 onClick={() => handleDeleteItem(index)}
                                 sx={{
                                     position: 'absolute',
@@ -268,7 +270,7 @@ export const ArrayRenderer = ({ inputParam, data, disabled, isDocStore = false }
                 startIcon={<IconPlus />}
                 onClick={handleAddItem}
             >
-                Add {inputParam.label}
+                {t('buttons.add')} {inputParam.label}
             </Button>
         </>
     )

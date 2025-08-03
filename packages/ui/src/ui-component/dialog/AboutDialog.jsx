@@ -5,15 +5,17 @@ import { Dialog, DialogContent, DialogTitle, TableContainer, Table, TableHead, T
 import moment from 'moment'
 import axios from 'axios'
 import { baseURL } from '@/store/constant'
+import useTranslation from '@/hooks/useTranslation'
 
 const AboutDialog = ({ show, onCancel }) => {
     const portalElement = document.getElementById('portal')
+    const { t } = useTranslation()
 
     const [data, setData] = useState({})
 
     useEffect(() => {
         if (show) {
-            const latestReleaseReq = axios.get('https://api.github.com/repos/FlowiseAI/Flowise/releases/latest')
+            const latestReleaseReq = axios.get('https://api.github.com/repos/ConectaGPT/ConectaGPT/releases/latest')
             const currentVersionReq = axios.get(`${baseURL}/api/v1/version`, {
                 withCredentials: true,
                 headers: { 'Content-type': 'application/json', 'x-request-from': 'internal' }
@@ -45,7 +47,7 @@ const AboutDialog = ({ show, onCancel }) => {
             aria-describedby='alert-dialog-description'
         >
             <DialogTitle sx={{ fontSize: '1rem' }} id='alert-dialog-title'>
-                Flowise Version
+                {t('app.name')} {t('labels.version')}
             </DialogTitle>
             <DialogContent>
                 {data && (
@@ -53,9 +55,9 @@ const AboutDialog = ({ show, onCancel }) => {
                         <Table aria-label='simple table'>
                             <TableHead>
                                 <TableRow>
-                                    <TableCell>Current Version</TableCell>
-                                    <TableCell>Latest Version</TableCell>
-                                    <TableCell>Published At</TableCell>
+                                    <TableCell>{t('labels.current_version')}</TableCell>
+                                    <TableCell>{t('labels.latest_version')}</TableCell>
+                                    <TableCell>{t('labels.published_at')}</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

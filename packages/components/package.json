@@ -1,7 +1,7 @@
 {
-    "name": "flowise-components",
+    "name": "conectagpt-components",
     "version": "3.0.4",
-    "description": "Flowiseai Components",
+    "description": "ConectaGPT Components",
     "main": "dist/src/index",
     "types": "dist/src/index.d.ts",
     "scripts": {
@@ -10,11 +10,11 @@
         "clean": "rimraf dist",
         "nuke": "rimraf dist node_modules .turbo"
     },
-    "keywords": [],
-    "homepage": "https://flowiseai.com",
+    "keywords": ["ai", "components", "langchain", "conectagpt"],
+    "homepage": "https://conectagpt.com",
     "author": {
-        "name": "Henry Heng",
-        "email": "henryheng@flowiseai.com"
+        "name": "ConectaGPT Team",
+        "email": "info@conectagpt.com"
     },
     "license": "SEE LICENSE IN LICENSE.md",
     "dependencies": {

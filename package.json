@@ -1,14 +1,10 @@
 {
-    "name": "flowise",
+    "name": "conectagpt",
     "version": "3.0.4",
     "private": true,
-    "homepage": "https://flowiseai.com",
+    "homepage": "https://conectagpt.com",
     "workspaces": [
-        "packages/*",
-        "flowise",
-        "ui",
-        "components",
-        "api-documentation"
+        "packages/*"
     ],
     "scripts": {
         "build": "turbo run build",

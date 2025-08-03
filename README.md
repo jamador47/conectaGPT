@@ -1,93 +1,120 @@
 <!-- markdownlint-disable MD030 -->
 
 <p align="center">
-<img src="https://github.com/FlowiseAI/Flowise/blob/main/images/flowise_white.svg#gh-light-mode-only">
-<img src="https://github.com/FlowiseAI/Flowise/blob/main/images/flowise_dark.svg#gh-dark-mode-only">
+<img src="./packages/ui/src/assets/images/conectagpt_white.svg#gh-light-mode-only">
+<img src="./packages/ui/src/assets/images/conectagpt_dark.svg#gh-dark-mode-only">
 </p>
 
 <div align="center">
 
-[![Release Notes](https://img.shields.io/github/release/FlowiseAI/Flowise)](https://github.com/FlowiseAI/Flowise/releases)
-[![Discord](https://img.shields.io/discord/1087698854775881778?label=Discord&logo=discord)](https://discord.gg/jbaHfsRVBW)
-[![Twitter Follow](https://img.shields.io/twitter/follow/FlowiseAI?style=social)](https://twitter.com/FlowiseAI)
-[![GitHub star chart](https://img.shields.io/github/stars/FlowiseAI/Flowise?style=social)](https://star-history.com/#FlowiseAI/Flowise)
-[![GitHub fork](https://img.shields.io/github/forks/FlowiseAI/Flowise?style=social)](https://github.com/FlowiseAI/Flowise/fork)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE.md)
+[![Node.js](https://img.shields.io/badge/Node.js-18.15.0+-green.svg)](https://nodejs.org/)
+[![Spanish](https://img.shields.io/badge/Idioma-Español-red.svg)](#)
 
-English | [繁體中文](./i18n/README-TW.md) | [简体中文](./i18n/README-ZH.md) | [日本語](./i18n/README-JA.md) | [한국어](./i18n/README-KR.md)
+[Español](#) | [English](./README-EN.md)
 
 </div>
 
-<h3>Build AI Agents, Visually</h3>
-<a href="https://github.com/FlowiseAI/Flowise">
-<img width="100%" src="https://github.com/FlowiseAI/Flowise/blob/main/images/flowise_agentflow.gif?raw=true"></a>
+<h3>Construye Agentes de IA, Visualmente</h3>
 
-## 📚 Table of Contents
+## 🌟 Acerca de ConectaGPT
 
-- [⚡ Quick Start](#-quick-start)
+**ConectaGPT** nace como un proyecto open source fork de FlowiseAI, que busca **reducir la brecha al acceso y manipulación de agentes de IA para personas de habla hispana y con poco contexto técnico**.
+
+### 🎯 Nuestra Misión
+
+Democratizar el acceso a la inteligencia artificial mediante:
+- **Interfaz completamente en español**: Navegación, configuración y documentación
+- **Experiencia simplificada**: Diseñado para usuarios sin conocimientos técnicos avanzados
+- **Comunidad hispanohablante**: Soporte y recursos en español
+- **Accesibilidad**: Eliminando barreras idiomáticas y técnicas
+
+### 🚀 ¿Qué es ConectaGPT?
+
+ConectaGPT es una plataforma visual que te permite construir y gestionar agentes de IA sin necesidad de programar. Con una interfaz intuitiva de arrastrar y soltar, puedes:
+
+- 🤖 Crear chatbots inteligentes
+- 🔗 Conectar múltiples servicios de IA
+- 📚 Procesar documentos y bases de conocimiento
+- 🛠️ Integrar herramientas especializadas
+- 📊 Monitorear y analizar conversaciones
+## 📚 Tabla de Contenidos
+
+- [⚡ Inicio Rápido](#-inicio-rápido)
 - [🐳 Docker](#-docker)
-- [👨‍💻 Developers](#-developers)
-- [🌱 Env Variables](#-env-variables)
-- [📖 Documentation](#-documentation)
-- [🌐 Self Host](#-self-host)
-- [☁️ Flowise Cloud](#️-flowise-cloud)
-- [🙋 Support](#-support)
-- [🙌 Contributing](#-contributing)
-- [📄 License](#-license)
+- [👨‍💻 Desarrolladores](#-desarrolladores)
+- [🌱 Variables de Entorno](#-variables-de-entorno)
+- [📖 Documentación](#-documentación)
+- [🌐 Auto-hosting](#-auto-hosting)
+- [🙋 Soporte](#-soporte)
+- [🙌 Contribuir](#-contribuir)
+- [📄 Licencia](#-licencia)
 
-## ⚡Quick Start
+## ⚡ Inicio Rápido
 
-Download and Install [NodeJS](https://nodejs.org/en/download) >= 18.15.0
+Descarga e instala [NodeJS](https://nodejs.org/es/download) >= 18.15.0
 
-1. Install Flowise
+1. Clona el repositorio de ConectaGPT
     ```bash
-    npm install -g flowise
-    ```
-2. Start Flowise
-
-    ```bash
-    npx flowise start
+    git clone https://github.com/tu-usuario/conectaGPT.git
+    cd conectaGPT
     ```
 
-3. Open [http://localhost:3000](http://localhost:3000)
+2. Instala las dependencias
+    ```bash
+    pnpm install
+    ```
+
+3. Construye el proyecto
+    ```bash
+    pnpm build
+    ```
+
+4. Inicia ConectaGPT
+    ```bash
+    pnpm start
+    ```
+
+5. Abre [http://localhost:3000](http://localhost:3000) en tu navegador
 
 ## 🐳 Docker
 
 ### Docker Compose
 
-1. Clone the Flowise project
-2. Go to `docker` folder at the root of the project
-3. Copy `.env.example` file, paste it into the same location, and rename to `.env` file
-4. `docker compose up -d`
-5. Open [http://localhost:3000](http://localhost:3000)
-6. You can bring the containers down by `docker compose stop`
+1. Clona el proyecto ConectaGPT
+2. Ve a la carpeta `docker` en la raíz del proyecto
+3. Copia el archivo `.env.example`, pégalo en la misma ubicación y renómbralo a `.env`
+4. Ejecuta `docker compose up -d`
+5. Abre [http://localhost:3000](http://localhost:3000)
+6. Puedes detener los contenedores con `docker compose stop`
 
-### Docker Image
+### Imagen Docker
 
-1. Build the image locally:
+1. Construye la imagen localmente:
    
     ```bash
-    docker build --no-cache -t flowise .
+    docker build --no-cache -t conectagpt .
     ```
-2. Run image:
+2. Ejecuta la imagen:
    
     ```bash
-    docker run -d --name flowise -p 3000:3000 flowise
+    docker run -d --name conectagpt -p 3000:3000 conectagpt
     ```
 
-3. Stop image:
+3. Detén la imagen:
    
     ```bash
-    docker stop flowise
+    docker stop conectagpt
     ```
 
-## 👨‍💻 Developers
+## 👨‍💻 Desarrolladores
 
-Flowise has 3 different modules in a single mono repository.
+ConectaGPT tiene 4 módulos diferentes en un único repositorio mono:
 
--   `server`: Node backend to serve API logics
--   `ui`: React frontend
--   `components`: Third-party nodes integrations
--   `api-documentation`: Auto-generated swagger-ui API docs from express
+-   `server`: Backend de Node.js para servir la lógica de API
+-   `ui`: Frontend de React con interfaz completamente en español
+-   `components`: Integraciones de nodos de terceros
+-   `api-documentation`: Documentación API swagger-ui auto-generada
 
 ### Prerequisite
 
@@ -98,25 +125,25 @@ Flowise has 3 different modules in a single mono repository.
 
 ### Setup
 
-1.  Clone the repository:
+1.  Clona el repositorio:
 
     ```bash
-    git clone https://github.com/FlowiseAI/Flowise.git
+    git clone https://github.com/tu-usuario/conectaGPT.git
     ```
 
-2.  Go into repository folder:
+2.  Ve a la carpeta del repositorio:
 
     ```bash
-    cd Flowise
+    cd conectaGPT
     ```
 
-3.  Install all dependencies of all modules:
+3.  Instala todas las dependencias de todos los módulos:
 
     ```bash
     pnpm install
     ```
 
-4.  Build all the code:
+4.  Construye todo el código:
 
     ```bash
     pnpm build
@@ -124,98 +151,75 @@ Flowise has 3 different modules in a single mono repository.
 
     <details>
     <summary>Exit code 134 (JavaScript heap out of memory)</summary>  
-      If you get this error when running the above `build` script, try increasing the Node.js heap size and run the script again:
+      Si obtienes este error al ejecutar el script `build`, intenta aumentar el tamaño del heap de Node.js y ejecuta el script nuevamente:
 
         export NODE_OPTIONS="--max-old-space-size=4096"
         pnpm build
 
     </details>
 
-5.  Start the app:
+5.  Inicia la aplicación:
 
     ```bash
     pnpm start
     ```
 
-    You can now access the app on [http://localhost:3000](http://localhost:3000)
+    Ahora puedes acceder a la aplicación en [http://localhost:3000](http://localhost:3000)
 
-6.  For development build:
+6.  Para construcción de desarrollo:
 
-    -   Create `.env` file and specify the `VITE_PORT` (refer to `.env.example`) in `packages/ui`
-    -   Create `.env` file and specify the `PORT` (refer to `.env.example`) in `packages/server`
-    -   Run:
+    -   Crea un archivo `.env` y especifica el `VITE_PORT` (consulta `.env.example`) en `packages/ui`
+    -   Crea un archivo `.env` y especifica el `PORT` (consulta `.env.example`) en `packages/server`
+    -   Ejecuta:
 
         ```bash
         pnpm dev
         ```
 
-    Any code changes will reload the app automatically on [http://localhost:8080](http://localhost:8080)
+    Cualquier cambio en el código recargará la aplicación automáticamente en [http://localhost:8080](http://localhost:8080)
 
-## 🌱 Env Variables
+## 🌱 Variables de Entorno
 
-Flowise supports different environment variables to configure your instance. You can specify the following variables in the `.env` file inside `packages/server` folder. Read [more](https://github.com/FlowiseAI/Flowise/blob/main/CONTRIBUTING.md#-env-variables)
+ConectaGPT soporta diferentes variables de entorno para configurar tu instancia. Puedes especificar las siguientes variables en el archivo `.env` dentro de la carpeta `packages/server`. Lee [más información](./CONTRIBUTING.md#-variables-de-entorno)
 
-## 📖 Documentation
+## 📖 Documentación
 
-You can view the Flowise Docs [here](https://docs.flowiseai.com/)
+Puedes ver la documentación de ConectaGPT en el repositorio oficial.
 
-## 🌐 Self Host
+## 🌐 Auto-hosting
 
-Deploy Flowise self-hosted in your existing infrastructure, we support various [deployments](https://docs.flowiseai.com/configuration/deployment)
+Despliega ConectaGPT auto-hospedado en tu infraestructura existente. Soportamos varios tipos de despliegue:
 
--   [AWS](https://docs.flowiseai.com/configuration/deployment/aws)
--   [Azure](https://docs.flowiseai.com/configuration/deployment/azure)
--   [Digital Ocean](https://docs.flowiseai.com/configuration/deployment/digital-ocean)
--   [GCP](https://docs.flowiseai.com/configuration/deployment/gcp)
--   [Alibaba Cloud](https://computenest.console.aliyun.com/service/instance/create/default?type=user&ServiceName=Flowise社区版)
+-   AWS
+-   Azure
+-   Digital Ocean
+-   GCP
+-   Alibaba Cloud
 -   <details>
       <summary>Others</summary>
 
-    -   [Railway](https://docs.flowiseai.com/configuration/deployment/railway)
-
-        [![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/pn4G8S?referralCode=WVNPD9)
-
-    -   [Render](https://docs.flowiseai.com/configuration/deployment/render)
-
-        [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://docs.flowiseai.com/configuration/deployment/render)
-
-    -   [HuggingFace Spaces](https://docs.flowiseai.com/deployment/hugging-face)
-
-        <a href="https://huggingface.co/spaces/FlowiseAI/Flowise"><img src="https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-hf-spaces-sm.svg" alt="HuggingFace Spaces"></a>
-
-    -   [Elestio](https://elest.io/open-source/flowiseai)
-
-        [![Deploy on Elestio](https://elest.io/images/logos/deploy-to-elestio-btn.png)](https://elest.io/open-source/flowiseai)
-
-    -   [Sealos](https://template.sealos.io/deploy?templateName=flowise)
-
-        [![Deploy on Sealos](https://sealos.io/Deploy-on-Sealos.svg)](https://template.sealos.io/deploy?templateName=flowise)
-
-    -   [RepoCloud](https://repocloud.io/details/?app_id=29)
-
-        [![Deploy on RepoCloud](https://d16t0pc4846x52.cloudfront.net/deploy.png)](https://repocloud.io/details/?app_id=29)
+    -   Railway
+    -   Render
+    -   HuggingFace Spaces
+    -   Elestio
+    -   Sealos
+    -   RepoCloud
 
       </details>
 
-## ☁️ Flowise Cloud
+## ☁️ ConectaGPT Cloud
 
-Get Started with [Flowise Cloud](https://flowiseai.com/).
+Por ahora, ConectaGPT está disponible únicamente como proyecto open source en GitHub. No contamos con una plataforma cloud dedicada.
 
-## 🙋 Support
+## 🙋 Soporte
 
-Feel free to ask any questions, raise problems, and request new features in [Discussion](https://github.com/FlowiseAI/Flowise/discussions).
+Siente libre de hacer cualquier pregunta, reportar problemas y solicitar nuevas funcionalidades en las [Discusiones](https://github.com/tu-usuario/conectaGPT/discussions) del repositorio.
 
-## 🙌 Contributing
+## 🙌 Contribuir
 
-Thanks go to these awesome contributors
+Gracias a todos los increíbles contribuidores de ConectaGPT y el proyecto original FlowiseAI.
 
-<a href="https://github.com/FlowiseAI/Flowise/graphs/contributors">
-<img src="https://contrib.rocks/image?repo=FlowiseAI/Flowise" />
-</a><br><br>
-
-See [Contributing Guide](CONTRIBUTING.md). Reach out to us at [Discord](https://discord.gg/jbaHfsRVBW) if you have any questions or issues.
-
-[![Star History Chart](https://api.star-history.com/svg?repos=FlowiseAI/Flowise&type=Timeline)](https://star-history.com/#FlowiseAI/Flowise&Date)
+Consulta la [Guía de Contribución](CONTRIBUTING.md) para más información sobre cómo contribuir al proyecto.
 
 ## 📄 License
 

@@ -1,11 +1,11 @@
 {
-    "name": "flowise",
+    "name": "conectagpt",
     "version": "3.0.4",
-    "description": "Flowiseai Server",
+    "description": "ConectaGPT Server",
     "main": "dist/index",
     "types": "dist/index.d.ts",
     "bin": {
-        "flowise": "./bin/run"
+        "conectagpt": "./bin/run"
     },
     "files": [
         "bin",
@@ -49,11 +49,11 @@
         "cypress:ci": "START_SERVER_AND_TEST_INSECURE=1 start-server-and-test start https-get://localhost:3000 cypress:run",
         "test": "jest --runInBand --detectOpenHandles --forceExit"
     },
-    "keywords": [],
-    "homepage": "https://flowiseai.com",
+    "keywords": ["ai", "chatbot", "gpt", "langchain", "spanish", "conectagpt"],
+    "homepage": "https://conectagpt.com",
     "author": {
-        "name": "Henry Heng",
-        "email": "henryheng@flowiseai.com"
+        "name": "ConectaGPT Team",
+        "email": "info@conectagpt.com"
     },
     "engines": {
         "node": ">=18.15.0 <19.0.0 || ^20"
@@ -105,9 +105,9 @@
         "express-mysql-session": "^3.0.3",
         "express-rate-limit": "^6.9.0",
         "express-session": "^1.18.1",
-        "flowise-components": "workspace:^",
+        "conectagpt-components": "workspace:^",
         "flowise-nim-container-manager": "^1.0.11",
-        "flowise-ui": "workspace:^",
+        "conectagpt-ui": "workspace:^",
         "global-agent": "^3.0.0",
         "gulp": "^4.0.2",
         "handlebars": "^4.7.8",

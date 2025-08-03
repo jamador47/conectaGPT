@@ -36,6 +36,7 @@ import credentialsApi from '@/api/credentials'
 // Hooks
 import useApi from '@/hooks/useApi'
 import useConfirm from '@/hooks/useConfirm'
+import { useTranslation } from '@/hooks/useTranslation'
 
 // utils
 import useNotifier from '@/utils/useNotifier'
@@ -75,6 +76,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 
 const Credentials = () => {
     const theme = useTheme()
+    const { t } = useTranslation()
     const customization = useSelector((state) => state.customization)
     const dispatch = useDispatch()
     useNotifier()
@@ -109,7 +111,7 @@ const Credentials = () => {
 
     const listCredential = () => {
         const dialogProp = {
-            title: 'Add New Credential',
+            title: t('credentials.add_new_credential'),
             componentsCredentials
         }
         setCredentialListDialogProps(dialogProp)
@@ -119,8 +121,8 @@ const Credentials = () => {
     const addNew = (credentialComponent) => {
         const dialogProp = {
             type: 'ADD',
-            cancelButtonName: 'Cancel',
-            confirmButtonName: 'Add',
+            cancelButtonName: t('buttons.cancel'),
+            confirmButtonName: t('buttons.add'),
             credentialComponent
         }
         setSpecificCredentialDialogProps(dialogProp)
@@ -130,8 +132,8 @@ const Credentials = () => {
     const edit = (credential) => {
         const dialogProp = {
             type: 'EDIT',
-            cancelButtonName: 'Cancel',
-            confirmButtonName: 'Save',
+            cancelButtonName: t('buttons.cancel'),
+            confirmButtonName: t('buttons.save'),
             data: credential
         }
         setSpecificCredentialDialogProps(dialogProp)
@@ -141,12 +143,12 @@ const Credentials = () => {
     const share = (credential) => {
         const dialogProps = {
             type: 'EDIT',
-            cancelButtonName: 'Cancel',
-            confirmButtonName: 'Share',
+            cancelButtonName: t('buttons.cancel'),
+            confirmButtonName: t('buttons.share'),
             data: {
                 id: credential.id,
                 name: credential.name,
-                title: 'Share Credential',
+                title: t('credentials.share_credential'),
                 itemType: 'credential'
             }
         }
@@ -156,10 +158,10 @@ const Credentials = () => {
 
     const deleteCredential = async (credential) => {
         const confirmPayload = {
-            title: `Delete`,
-            description: `Delete credential ${credential.name}?`,
-            confirmButtonName: 'Delete',
-            cancelButtonName: 'Cancel'
+            title: t('credentials.delete_title'),
+            description: t('credentials.delete_confirmation', { name: credential.name }),
+            confirmButtonName: t('buttons.delete'),
+            cancelButtonName: t('buttons.cancel')
         }
         const isConfirmed = await confirm(confirmPayload)
 
@@ -168,7 +170,7 @@ const Credentials = () => {
                 const deleteResp = await credentialsApi.deleteCredential(credential.id)
                 if (deleteResp.data) {
                     enqueueSnackbar({
-                        message: 'Credential deleted',
+                        message: t('credentials.credential_deleted'),
                         options: {
                             key: new Date().getTime() + Math.random(),
                             variant: 'success',
@@ -183,7 +185,7 @@ const Credentials = () => {
                 }
             } catch (error) {
                 enqueueSnackbar({
-                    message: `Failed to delete Credential: ${
+                    message: `${t('credentials.failed_to_delete')}: ${
                         typeof error.response.data === 'object' ? error.response.data.message : error.response.data
                     }`,
                     options: {
@@ -245,9 +247,9 @@ const Credentials = () => {
                         <ViewHeader
                             onSearchChange={onSearchChange}
                             search={true}
-                            searchPlaceholder='Search Credentials'
-                            title='Credentials'
-                            description='API keys, tokens, and secrets for 3rd party integrations'
+                            searchPlaceholder={t('credentials.search_placeholder')}
+                            title={t('credentials.title')}
+                            description={t('credentials.subtitle')}
                         >
                             <StyledPermissionButton
                                 permissionId='credentials:create'
@@ -256,7 +258,7 @@ const Credentials = () => {
                                 onClick={listCredential}
                                 startIcon={<IconPlus />}
                             >
-                                Add Credential
+                                {t('credentials.add_credential')}
                             </StyledPermissionButton>
                         </ViewHeader>
                         {!isLoading && credentials.length <= 0 ? (
@@ -268,7 +270,7 @@ const Credentials = () => {
                                         alt='CredentialEmptySVG'
                                     />
                                 </Box>
-                                <div>No Credentials Yet</div>
+                                <div>{t('credentials.empty_state')}</div>
                             </Stack>
                         ) : (
                             <TableContainer
@@ -285,9 +287,9 @@ const Credentials = () => {
                                         }}
                                     >
                                         <TableRow>
-                                            <StyledTableCell>Name</StyledTableCell>
-                                            <StyledTableCell>Last Updated</StyledTableCell>
-                                            <StyledTableCell>Created</StyledTableCell>
+                                            <StyledTableCell>{t('credentials.name')}</StyledTableCell>
+                                            <StyledTableCell>{t('credentials.last_updated')}</StyledTableCell>
+                                            <StyledTableCell>{t('credentials.created')}</StyledTableCell>
                                             <StyledTableCell style={{ width: '5%' }}> </StyledTableCell>
                                             <StyledTableCell style={{ width: '5%' }}> </StyledTableCell>
                                             <StyledTableCell style={{ width: '5%' }}> </StyledTableCell>

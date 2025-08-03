@@ -43,6 +43,7 @@ import { useError } from '@/store/context/ErrorContext'
 // Hooks
 import useApi from '@/hooks/useApi'
 import useConfirm from '@/hooks/useConfirm'
+import { useTranslation } from '@/hooks/useTranslation'
 
 // utils
 import useNotifier from '@/utils/useNotifier'
@@ -202,6 +203,7 @@ APIKeyRow.propTypes = {
 }
 const APIKey = () => {
     const theme = useTheme()
+    const { t } = useTranslation()
     const customization = useSelector((state) => state.customization)
 
     const dispatch = useDispatch()
@@ -273,10 +275,10 @@ const APIKey = () => {
 
     const addNew = () => {
         const dialogProp = {
-            title: 'Add New API Key',
+            title: t('apikeys.add_new_api_key'),
             type: 'ADD',
-            cancelButtonName: 'Cancel',
-            confirmButtonName: 'Add',
+            cancelButtonName: t('buttons.cancel'),
+            confirmButtonName: t('buttons.add'),
             customBtnId: 'btn_confirmAddingApiKey'
         }
         setDialogProps(dialogProp)
@@ -285,10 +287,10 @@ const APIKey = () => {
 
     const edit = (key) => {
         const dialogProp = {
-            title: 'Edit API Key',
+            title: t('apikeys.edit_api_key'),
             type: 'EDIT',
-            cancelButtonName: 'Cancel',
-            confirmButtonName: 'Save',
+            cancelButtonName: t('buttons.cancel'),
+            confirmButtonName: t('buttons.save'),
             customBtnId: 'btn_confirmEditingApiKey',
             key
         }
@@ -299,8 +301,8 @@ const APIKey = () => {
     const uploadDialog = () => {
         const dialogProp = {
             type: 'ADD',
-            cancelButtonName: 'Cancel',
-            confirmButtonName: 'Upload',
+            cancelButtonName: t('buttons.cancel'),
+            confirmButtonName: t('apikeys.upload'),
             data: {}
         }
         setUploadDialogProps(dialogProp)
@@ -309,13 +311,13 @@ const APIKey = () => {
 
     const deleteKey = async (key) => {
         const confirmPayload = {
-            title: `Delete`,
+            title: t('apikeys.delete_title'),
             description:
                 key.chatFlows.length === 0
-                    ? `Delete key [${key.keyName}] ? `
-                    : `Delete key [${key.keyName}] ?\n There are ${key.chatFlows.length} chatflows using this key.`,
-            confirmButtonName: 'Delete',
-            cancelButtonName: 'Cancel',
+                    ? t('apikeys.delete_confirmation', { keyName: key.keyName })
+                    : t('apikeys.delete_confirmation_with_flows', { keyName: key.keyName, count: key.chatFlows.length }),
+            confirmButtonName: t('buttons.delete'),
+            cancelButtonName: t('buttons.cancel'),
             customBtnId: 'btn_initiateDeleteApiKey'
         }
         const isConfirmed = await confirm(confirmPayload)
@@ -325,7 +327,7 @@ const APIKey = () => {
                 const deleteResp = await apiKeyApi.deleteAPI(key.id)
                 if (deleteResp.data) {
                     enqueueSnackbar({
-                        message: 'API key deleted',
+                        message: t('apikeys.api_key_deleted'),
                         options: {
                             key: new Date().getTime() + Math.random(),
                             variant: 'success',
@@ -340,7 +342,7 @@ const APIKey = () => {
                 }
             } catch (error) {
                 enqueueSnackbar({
-                    message: `Failed to delete API key: ${
+                    message: `${t('apikeys.failed_to_delete')}: ${
                         typeof error.response.data === 'object' ? error.response.data.message : error.response.data
                     }`,
                     options: {
@@ -391,9 +393,9 @@ const APIKey = () => {
                         <ViewHeader
                             onSearchChange={onSearchChange}
                             search={true}
-                            searchPlaceholder='Search API Keys'
-                            title='API Keys'
-                            description='Flowise API & SDK authentication keys'
+                            searchPlaceholder={t('apikeys.search_placeholder')}
+                            title={t('apikeys.title')}
+                            description={t('apikeys.subtitle')}
                         >
                             <PermissionButton
                                 permissionId={'apikeys:import'}
@@ -403,7 +405,7 @@ const APIKey = () => {
                                 startIcon={<IconFileUpload />}
                                 id='btn_importApiKeys'
                             >
-                                Import
+                                {t('apikeys.import')}
                             </PermissionButton>
                             <StyledPermissionButton
                                 permissionId={'apikeys:create'}
@@ -413,7 +415,7 @@ const APIKey = () => {
                                 startIcon={<IconPlus />}
                                 id='btn_createApiKey'
                             >
-                                Create Key
+                                {t('apikeys.create_key')}
                             </StyledPermissionButton>
                         </ViewHeader>
                         {!isLoading && apiKeys?.length <= 0 ? (
@@ -425,7 +427,7 @@ const APIKey = () => {
                                         alt='APIEmptySVG'
                                     />
                                 </Box>
-                                <div>No API Keys Yet</div>
+                                <div>{t('apikeys.empty_state')}</div>
                             </Stack>
                         ) : (
                             <>
@@ -443,10 +445,10 @@ const APIKey = () => {
                                             }}
                                         >
                                             <TableRow>
-                                                <StyledTableCell>Key Name</StyledTableCell>
-                                                <StyledTableCell>API Key</StyledTableCell>
-                                                <StyledTableCell>Usage</StyledTableCell>
-                                                <StyledTableCell>Updated</StyledTableCell>
+                                                <StyledTableCell>{t('apikeys.key_name')}</StyledTableCell>
+                                                <StyledTableCell>{t('apikeys.api_key')}</StyledTableCell>
+                                                <StyledTableCell>{t('apikeys.usage')}</StyledTableCell>
+                                                <StyledTableCell>{t('apikeys.updated')}</StyledTableCell>
                                                 <Available permission={'apikeys:update,apikeys:create'}>
                                                     <StyledTableCell> </StyledTableCell>
                                                 </Available>

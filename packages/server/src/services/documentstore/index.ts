@@ -11,7 +11,7 @@ import {
     removeFilesFromStorage,
     removeSpecificFileFromStorage,
     removeSpecificFileFromUpload
-} from 'flowise-components'
+} from 'conectagpt-components'
 import { StatusCodes } from 'http-status-codes'
 import { cloneDeep, omit } from 'lodash'
 import * as path from 'path'

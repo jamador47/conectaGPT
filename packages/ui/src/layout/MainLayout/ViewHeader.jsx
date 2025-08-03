@@ -11,6 +11,7 @@ import { IconSearch, IconArrowLeft, IconEdit } from '@tabler/icons-react'
 
 import useSearchShortcut from '@/hooks/useSearchShortcut'
 import { getOS } from '@/utils/genericHelper'
+import { useTranslation } from '@/hooks/useTranslation'
 
 const os = getOS()
 const isMac = os === 'macos'
@@ -22,7 +23,7 @@ const ViewHeader = ({
     filters = null,
     onSearchChange,
     search,
-    searchPlaceholder = 'Search',
+    searchPlaceholder,
     title,
     description,
     isBackButton,
@@ -31,8 +32,11 @@ const ViewHeader = ({
     onEdit
 }) => {
     const theme = useTheme()
+    const { t } = useTranslation()
     const searchInputRef = useRef()
     useSearchShortcut(searchInputRef)
+    
+    const defaultSearchPlaceholder = searchPlaceholder || t('placeholders.search')
 
     return (
         <Box sx={{ flexGrow: 1, py: 1.25, width: '100%' }}>
@@ -47,7 +51,7 @@ const ViewHeader = ({
             >
                 <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'row' }}>
                     {isBackButton && (
-                        <StyledFab sx={{ mr: 3 }} size='small' color='secondary' aria-label='back' title='Back' onClick={onBack}>
+                        <StyledFab sx={{ mr: 3 }} size='small' color='secondary' aria-label='back' title={t('buttons.back')} onClick={onBack}>
                             <IconArrowLeft />
                         </StyledFab>
                     )}
@@ -88,7 +92,7 @@ const ViewHeader = ({
                         )}
                     </Box>
                     {isEditButton && (
-                        <IconButton sx={{ ml: 3 }} color='secondary' title='Edit' onClick={onEdit}>
+                        <IconButton sx={{ ml: 3 }} color='secondary' title={t('buttons.edit')} onClick={onEdit}>
                             <IconEdit />
                         </IconButton>
                     )}
@@ -109,7 +113,7 @@ const ViewHeader = ({
                                 }
                             }}
                             variant='outlined'
-                            placeholder={`${searchPlaceholder} ${isDesktop ? keyboardShortcut : ''}`}
+                            placeholder={`${defaultSearchPlaceholder} ${isDesktop ? keyboardShortcut : ''}`}
                             onChange={onSearchChange}
                             startAdornment={
                                 <Box
