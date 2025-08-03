@@ -24,6 +24,8 @@ i18n
     lng: 'es', // Force Spanish as default
     
     keySeparator: '.', // Use dots for nested keys
+    returnKeyIfTranslationIsMissing: false, // Don't return key if translation is missing
+    returnObjects: false, // Don't return objects
     
     interpolation: {
       escapeValue: false // React already escapes values

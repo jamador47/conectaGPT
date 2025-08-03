@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { cloneDeep } from 'lodash'
 import showdown from 'showdown'
 import parser from 'html-react-parser'
+import { useTranslation } from '../../hooks/useTranslation'
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles'
@@ -126,6 +127,43 @@ const NodeInputHandler = ({
     const ref = useRef(null)
     const { reactFlowInstance, deleteEdge, onNodeDataChange } = useContext(flowContext)
     const updateNodeInternals = useUpdateNodeInternals()
+    const { t } = useTranslation()
+
+    // Function to translate input labels
+    const translateInputLabel = (label) => {
+        if (!label) return label
+        try {
+            const key = `inputLabels.${label}`
+            const translated = t(key, { defaultValue: label })
+            return translated
+        } catch (error) {
+            return label
+        }
+    }
+
+    // Function to translate input descriptions
+    const translateInputDescription = (description) => {
+        if (!description) return description
+        try {
+            const key = `inputDescriptions.${description}`
+            const translated = t(key, { defaultValue: description })
+            return translated
+        } catch (error) {
+            return description
+        }
+    }
+
+    // Function to translate input placeholders
+    const translateInputPlaceholder = (placeholder) => {
+        if (!placeholder) return placeholder
+        try {
+            const key = `inputPlaceholders.${placeholder}`
+            const translated = t(key, { defaultValue: placeholder })
+            return translated
+        } catch (error) {
+            return placeholder
+        }
+    }
 
     useNotifier()
     const dispatch = useDispatch()
@@ -869,9 +907,9 @@ const NodeInputHandler = ({
                         )}
                         <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
                             <Typography>
-                                {inputParam.label}
+                                {translateInputLabel(inputParam.label)}
                                 {!inputParam.optional && <span style={{ color: 'red' }}>&nbsp;*</span>}
-                                {inputParam.description && <TooltipWithParser style={{ marginLeft: 10 }} title={inputParam.description} />}
+                                {inputParam.description && <TooltipWithParser style={{ marginLeft: 10 }} title={translateInputDescription(inputParam.description)} />}
                             </Typography>
                             <div style={{ flexGrow: 1 }}></div>
                             {inputParam.hint && !isAdditionalParams && (
@@ -1069,7 +1107,7 @@ const NodeInputHandler = ({
                                         height={inputParam.rows ? '100px' : '200px'}
                                         theme={customization.isDarkMode ? 'dark' : 'light'}
                                         lang={'js'}
-                                        placeholder={inputParam.placeholder}
+                                        placeholder={translateInputPlaceholder(inputParam.placeholder)}
                                         onValueChange={(code) => (data.inputs[inputParam.name] = code)}
                                         basicSetup={{ highlightActiveLine: false, highlightActiveLineGutter: false }}
                                     />
@@ -1082,7 +1120,7 @@ const NodeInputHandler = ({
                             (window.location.href.includes('v2/agentcanvas') || window.location.href.includes('v2/marketplace')) ? (
                                 <RichInput
                                     key={data.inputs[inputParam.name]}
-                                    placeholder={inputParam.placeholder}
+                                    placeholder={translateInputPlaceholder(inputParam.placeholder)}
                                     disabled={disabled}
                                     inputParam={inputParam}
                                     onChange={(newValue) => (data.inputs[inputParam.name] = newValue)}
@@ -1094,7 +1132,7 @@ const NodeInputHandler = ({
                             ) : (
                                 <Input
                                     key={data.inputs[inputParam.name]}
-                                    placeholder={inputParam.placeholder}
+                                    placeholder={translateInputPlaceholder(inputParam.placeholder)}
                                     disabled={disabled}
                                     inputParam={inputParam}
                                     onChange={(newValue) => (data.inputs[inputParam.name] = newValue)}
@@ -1133,7 +1171,7 @@ const NodeInputHandler = ({
                                             disabled={disabled}
                                             onClick={() => onEditJSONClicked(data.inputs[inputParam.name] ?? '', inputParam)}
                                         >
-                                            {inputParam.label}
+                                            {translateInputLabel(inputParam.label)}
                                         </Button>
                                         <FormatPromptValuesDialog
                                             show={showFormatPromptValuesDialog}

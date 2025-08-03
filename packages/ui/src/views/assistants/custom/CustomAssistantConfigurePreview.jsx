@@ -8,6 +8,7 @@ import PropTypes from 'prop-types'
 // Hooks
 import useApi from '@/hooks/useApi'
 import useConfirm from '@/hooks/useConfirm'
+import { useTranslation } from '@/hooks/useTranslation'
 
 // Material-UI
 import { IconButton, Avatar, ButtonBase, Toolbar, Box, Button, Grid, OutlinedInput, Stack, Typography } from '@mui/material'
@@ -81,6 +82,7 @@ const CustomAssistantConfigurePreview = () => {
     const settingsRef = useRef()
     const canvas = useSelector((state) => state.canvas)
     const customization = useSelector((state) => state.customization)
+    const { t } = useTranslation()
 
     const getSpecificAssistantApi = useApi(assistantsApi.getSpecificAssistant)
     const getChatModelsApi = useApi(assistantsApi.getChatModels)
@@ -1058,8 +1060,8 @@ const CustomAssistantConfigurePreview = () => {
                                             }}
                                         >
                                             <Stack sx={{ position: 'relative', alignItems: 'center' }} direction='row'>
-                                                <Typography>Knowledge (Document Stores)</Typography>
-                                                <TooltipWithParser title='Give your assistant context about different document sources. Document stores must be upserted in advance.' />
+                                                <Typography>{t('inputLabels.Knowledge (Document Stores)')}</Typography>
+                                                <TooltipWithParser title={t('inputPlaceholders.Give your assistant context about different document sources. Document stores must be upserted in advance.')} />
                                             </Stack>
                                             <MultiDropdown
                                                 key={JSON.stringify(selectedDocumentStores)}
@@ -1077,9 +1079,9 @@ const CustomAssistantConfigurePreview = () => {
                                             {selectedDocumentStores.length > 0 && (
                                                 <Stack sx={{ mt: 3, position: 'relative', alignItems: 'center' }} direction='row'>
                                                     <Typography>
-                                                        Describe Knowledge<span style={{ color: 'red' }}>&nbsp;*</span>
+                                                        {t('inputLabels.Describe Knowledge')}<span style={{ color: 'red' }}>&nbsp;*</span>
                                                     </Typography>
-                                                    <TooltipWithParser title='Describe what the knowledge base is about, this is useful for the AI to know when and how to search for correct information' />
+                                                    <TooltipWithParser title={t('inputPlaceholders.Describe what the knowledge base is about, this is useful for the AI to know when and how to search for correct information')} />
                                                 </Stack>
                                             )}
                                             {selectedDocumentStores.map((ds, index) => {

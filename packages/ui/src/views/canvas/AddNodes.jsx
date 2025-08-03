@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect, memo } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
+import { useTranslation } from '../../hooks/useTranslation'
 
 // material-ui
 import { useTheme } from '@mui/material/styles'
@@ -74,6 +75,22 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, isAgentflowv2, onFlowGenerat
     const theme = useTheme()
     const customization = useSelector((state) => state.customization)
     const dispatch = useDispatch()
+    const { t } = useTranslation()
+
+    // Function to translate category names
+    const translateCategory = (category) => {
+        return t(`categories.${category}`) || category
+    }
+
+    // Function to translate node names
+    const translateNodeLabel = (label) => {
+        return t(`nodes.${label}`) || label
+    }
+
+    // Function to translate node descriptions
+    const translateNodeDescription = (description) => {
+        return t(`nodeDescriptions.${description}`) || description
+    }
 
     const [searchValue, setSearchValue] = useState('')
     const [nodes, setNodes] = useState({})
@@ -519,7 +536,7 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, isAgentflowv2, onFlowGenerat
                                                                             alignItems: 'center'
                                                                         }}
                                                                     >
-                                                                        <Typography variant='h5'>{category.split(';')[0]}</Typography>
+                                                                        <Typography variant='h5'>{translateCategory(category.split(';')[0])}</Typography>
                                                                         &nbsp;
                                                                         <Chip
                                                                             sx={{
@@ -540,7 +557,7 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, isAgentflowv2, onFlowGenerat
                                                                         />
                                                                     </div>
                                                                 ) : (
-                                                                    <Typography variant='h5'>{category}</Typography>
+                                                                    <Typography variant='h5'>{translateCategory(category)}</Typography>
                                                                 )}
                                                             </AccordionSummary>
                                                             <AccordionDetails>
@@ -606,7 +623,7 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, isAgentflowv2, onFlowGenerat
                                                                                                     alignItems: 'center'
                                                                                                 }}
                                                                                             >
-                                                                                                <span>{node.label}</span>
+                                                                                                <span>{translateNodeLabel(node.label)}</span>
                                                                                                 &nbsp;
                                                                                                 {node.badge && (
                                                                                                     <Chip
@@ -642,7 +659,7 @@ const AddNodes = ({ nodesData, node, isAgentCanvas, isAgentflowv2, onFlowGenerat
                                                                                             )}
                                                                                         </>
                                                                                     }
-                                                                                    secondary={node.description}
+                                                                                    secondary={translateNodeDescription(node.description)}
                                                                                 />
                                                                             </ListItem>
                                                                         </ListItemButton>
