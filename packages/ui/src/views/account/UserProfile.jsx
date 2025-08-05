@@ -15,6 +15,7 @@ import { BackdropLoader } from '@/ui-component/loading/BackdropLoader'
 // API
 import userApi from '@/api/user'
 import useApi from '@/hooks/useApi'
+import { useTranslation } from '@/hooks/useTranslation'
 
 // Store
 import { store } from '@/store'
@@ -33,6 +34,7 @@ import { IconAlertTriangle, IconX } from '@tabler/icons-react'
 const UserProfile = () => {
     useNotifier()
     const { error, setError } = useError()
+    const { t } = useTranslation()
 
     const dispatch = useDispatch()
     const enqueueSnackbar = (...args) => dispatch(enqueueSnackbarAction(...args))
@@ -55,7 +57,7 @@ const UserProfile = () => {
         const validationErrors = []
         setAuthErrors([])
         if (!isAuthenticated) {
-            validationErrors.push('User is not authenticated')
+            validationErrors.push(t('messages.user_not_authenticated'))
         }
         if (currentUser.isSSO) {
             validationErrors.push('User is a SSO user, unable to update details')
@@ -68,7 +70,7 @@ const UserProfile = () => {
         }
         if (newPasswordVal || confirmPasswordVal) {
             if (newPasswordVal !== confirmPasswordVal) {
-                validationErrors.push('New Password and Confirm Password do not match')
+                validationErrors.push(t('messages.password_mismatch'))
             }
             const passwordErrors = validatePassword(newPasswordVal)
             if (passwordErrors.length > 0) {
@@ -214,7 +216,7 @@ const UserProfile = () => {
                                         type='string'
                                         fullWidth
                                         size='small'
-                                        placeholder='Your login Id'
+                                        placeholder={t('placeholders.your_login_id')}
                                         name='name'
                                         onChange={(e) => setEmailVal(e.target.value)}
                                         value={emailVal}
@@ -232,7 +234,7 @@ const UserProfile = () => {
                                         type='string'
                                         fullWidth
                                         size='small'
-                                        placeholder='Your Name'
+                                        placeholder={t('placeholders.your_name')}
                                         name='name'
                                         onChange={(e) => setUsernameVal(e.target.value)}
                                         value={usernameVal}
@@ -255,10 +257,7 @@ const UserProfile = () => {
                                         value={newPasswordVal}
                                     />
                                     <Typography variant='caption'>
-                                        <i>
-                                            Password must be at least 8 characters long and contain at least one lowercase letter, one
-                                            uppercase letter, one digit, and one special character.
-                                        </i>
+                                        <i>{t('messages.password_requirements')}</i>
                                     </Typography>
                                 </Box>
                                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
@@ -278,7 +277,7 @@ const UserProfile = () => {
                                         value={confirmPasswordVal}
                                     />
                                     <Typography variant='caption'>
-                                        <i>Retype your new password. Must match the password typed above.</i>
+                                        <i>{t('messages.retype_password')}</i>
                                     </Typography>
                                 </Box>
                             </Box>

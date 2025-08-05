@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 // utils
 import useNotifier from '@/utils/useNotifier'
 import { validatePassword } from '@/utils/validation'
+import { useTranslation } from '@/hooks/useTranslation'
 
 // material-ui
 import {
@@ -62,6 +63,7 @@ const AccountSettings = () => {
     const dispatch = useDispatch()
     useNotifier()
     const navigate = useNavigate()
+    const { t } = useTranslation()
 
     const currentUser = useSelector((state) => state.auth.user)
     const customization = useSelector((state) => state.customization)
@@ -434,7 +436,7 @@ const AccountSettings = () => {
                 <ErrorBoundary error={error} />
             ) : (
                 <Stack flexDirection='column' sx={{ gap: 4 }}>
-                    <ViewHeader title='Account Settings' />
+                    <ViewHeader title={t('messages.account_settings')} />
                     {isLoading && !getUserByIdApi.data ? (
                         <Box display='flex' flexDirection='column' gap={gridSpacing}>
                             <Skeleton width='25%' height={32} />
@@ -609,7 +611,7 @@ const AccountSettings = () => {
                                                 color='error'
                                                 sx={{ borderRadius: 2, height: 40 }}
                                             >
-                                                Remove Seats
+                                                {t('messages.remove_seats')}
                                             </Button>
                                         )}
                                         <StyledButton
@@ -622,10 +624,10 @@ const AccountSettings = () => {
                                                     setOpenPricingDialog(true)
                                                 }
                                             }}
-                                            title='Add Seats is available only for PRO plan'
+                                            title={t('messages.add_seats_pro_only')}
                                             sx={{ borderRadius: 2, height: 40 }}
                                         >
-                                            Add Seats
+                                            {t('messages.add_seats')}
                                         </StyledButton>
                                     </Box>
                                 </Box>
@@ -727,7 +729,7 @@ const AccountSettings = () => {
                                             id='name'
                                             type='string'
                                             fullWidth
-                                            placeholder='Your Name'
+                                            placeholder={t('placeholders.your_name')}
                                             name='name'
                                             onChange={(e) => setProfileName(e.target.value)}
                                             value={profileName}
@@ -739,7 +741,7 @@ const AccountSettings = () => {
                                             id='email'
                                             type='string'
                                             fullWidth
-                                            placeholder='Email Address'
+                                            placeholder={t('placeholders.email_address')}
                                             name='email'
                                             onChange={(e) => setEmail(e.target.value)}
                                             value={email}
@@ -783,7 +785,7 @@ const AccountSettings = () => {
                                                 id='newPassword'
                                                 type='password'
                                                 fullWidth
-                                                placeholder='New Password'
+                                                placeholder={t('placeholders.new_password')}
                                                 name='newPassword'
                                                 onChange={(e) => setNewPassword(e.target.value)}
                                                 value={newPassword}
@@ -808,7 +810,7 @@ const AccountSettings = () => {
                                                 id='confirmPassword'
                                                 type='password'
                                                 fullWidth
-                                                placeholder='Confirm Password'
+                                                placeholder={t('placeholders.confirm_password')}
                                                 name='confirmPassword'
                                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                                 value={confirmPassword}
@@ -817,7 +819,7 @@ const AccountSettings = () => {
                                     </Box>
                                 </SettingsSection>
                             )}
-                            <SettingsSection title='Cancel Previous Subscription'>
+                            <SettingsSection title={t('messages.cancel_previous_subscription')}>
                                 <Box
                                     sx={{
                                         width: '100%',
@@ -846,7 +848,7 @@ const AccountSettings = () => {
                                                 id='email'
                                                 type='string'
                                                 fullWidth
-                                                placeholder='Email Address'
+                                                placeholder={t('placeholders.email_address')}
                                                 name='email'
                                                 onChange={(e) => setMigrateEmail(e.target.value)}
                                                 value={migrateEmail}
@@ -875,7 +877,7 @@ const AccountSettings = () => {
                                                     Loading
                                                 </Box>
                                             ) : (
-                                                'Send Instructions'
+                                                {t('messages.send_instructions')}
                                             )}
                                         </Button>
                                     </Box>

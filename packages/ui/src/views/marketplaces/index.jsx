@@ -323,7 +323,7 @@ const Marketplace = () => {
 
     const onUseTemplate = (selectedTool) => {
         const dialogProp = {
-            title: 'Add New Tool',
+            title: t('tools.add_new_tool'),
             type: 'IMPORT',
             cancelButtonName: 'Cancel',
             confirmButtonName: 'Add',
@@ -559,7 +559,7 @@ const Marketplace = () => {
                                         }}
                                     >
                                         <InputLabel size='small' id='type-fw-label'>
-                                            Framework
+                                            {t('marketplace.framework')}
                                         </InputLabel>
                                         <Select
                                             size='small'
@@ -568,7 +568,7 @@ const Marketplace = () => {
                                             multiple
                                             value={frameworkFilter}
                                             onChange={handleFrameworkFilterChange}
-                                            input={<OutlinedInput label='Framework' />}
+                                            input={<OutlinedInput label={t('marketplace.framework')} />}
                                             renderValue={(selected) => selected.join(', ')}
                                             MenuProps={MenuProps}
                                             sx={getSelectStyles(theme.palette.grey[900] + 25, theme?.customization?.isDarkMode)}
@@ -629,7 +629,11 @@ const Marketplace = () => {
                         {hasPermission('templates:marketplace') && hasPermission('templates:custom') && (
                             <Stack direction='row' justifyContent='space-between' sx={{ mb: 2 }}>
                                 <Tabs value={activeTabValue} onChange={handleTabChange} textColor='primary' aria-label='tabs'>
-                                    <PermissionTab permissionId='templates:marketplace' value={0} label={t('marketplace.community_templates')} />
+                                    <PermissionTab
+                                        permissionId='templates:marketplace'
+                                        value={0}
+                                        label={t('marketplace.community_templates')}
+                                    />
                                     <PermissionTab permissionId='templates:custom' value={1} label={t('marketplace.my_templates')} />
                                 </Tabs>
                                 <Autocomplete
@@ -796,7 +800,7 @@ const Marketplace = () => {
                                                     alt='WorkflowEmptySVG'
                                                 />
                                             </Box>
-                                            <div>No Marketplace Yet</div>
+                                            <div>{t('marketplace.no_marketplace_yet')}</div>
                                         </Stack>
                                     )}
                             </TabPanel>
@@ -929,7 +933,7 @@ const Marketplace = () => {
                                                 alt='WorkflowEmptySVG'
                                             />
                                         </Box>
-                                        <div>No Saved Custom Templates</div>
+                                        <div>{t('marketplace.no_saved_templates')}</div>
                                     </Stack>
                                 )}
                             </TabPanel>
