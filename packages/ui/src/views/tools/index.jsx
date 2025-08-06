@@ -7,6 +7,7 @@ import { useTheme } from '@mui/material/styles'
 // project imports
 import MainCard from '@/ui-component/cards/MainCard'
 import ItemCard from '@/ui-component/cards/ItemCard'
+import ResponsiveGrid from '@/ui-component/grid/ResponsiveGrid'
 import ToolDialog from './ToolDialog'
 import ViewHeader from '@/layout/MainLayout/ViewHeader'
 import ErrorBoundary from '@/ErrorBoundary'
@@ -232,20 +233,20 @@ const Tools = () => {
                             </ButtonGroup>
                         </ViewHeader>
                         {isLoading && (
-                            <Box display='grid' gridTemplateColumns='repeat(3, 1fr)' gap={gridSpacing}>
+                            <ResponsiveGrid spacing={gridSpacing} maxColumns={{ xs: 1, sm: 2, md: 3, lg: 4 }}>
                                 <Skeleton variant='rounded' height={160} />
                                 <Skeleton variant='rounded' height={160} />
                                 <Skeleton variant='rounded' height={160} />
-                            </Box>
+                            </ResponsiveGrid>
                         )}
                         {!isLoading && total > 0 && (
                             <>
                                 {!view || view === 'card' ? (
-                                    <Box display='grid' gridTemplateColumns='repeat(3, 1fr)' gap={gridSpacing}>
+                                    <ResponsiveGrid spacing={gridSpacing} maxColumns={{ xs: 1, sm: 2, md: 3, lg: 4 }}>
                                         {getAllToolsApi.data?.data?.filter(filterTools).map((data, index) => (
                                             <ItemCard data={data} key={index} onClick={() => edit(data)} />
                                         ))}
-                                    </Box>
+                                    </ResponsiveGrid>
                                 ) : (
                                     <ToolsTable data={getAllToolsApi.data.data} isLoading={isLoading} onSelect={edit} />
                                 )}

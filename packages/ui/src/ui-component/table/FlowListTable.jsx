@@ -18,7 +18,8 @@ import {
     TableSortLabel,
     Tooltip,
     Typography,
-    useTheme
+    useTheme,
+    useMediaQuery
 } from '@mui/material'
 import { tableCellClasses } from '@mui/material/TableCell'
 import FlowListMenu from '../button/FlowListMenu'
@@ -66,6 +67,8 @@ export const FlowListTable = ({
         ? hasPermission('agentflows:update,agentflows:delete,agentflows:config,agentflows:domains,templates:flowexport,agentflows:export')
         : hasPermission('chatflows:update,chatflows:delete,chatflows:config,chatflows:domains,templates:flowexport,chatflows:export')
     const theme = useTheme()
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
+    const isTablet = useMediaQuery(theme.breakpoints.down('md'))
     const customization = useSelector((state) => state.customization)
 
     const localStorageKeyOrder = getLocalStorageKeyName('order', isAgentCanvas)
@@ -106,8 +109,26 @@ export const FlowListTable = ({
 
     return (
         <>
-            <TableContainer sx={{ border: 1, borderColor: theme.palette.grey[900] + 25, borderRadius: 2 }} component={Paper}>
-                <Table sx={{ minWidth: 650 }} size='small' aria-label='a dense table'>
+            <TableContainer
+                sx={{
+                    border: 1,
+                    borderColor: theme.palette.grey[900] + 25,
+                    borderRadius: 2,
+                    overflowX: 'auto'
+                }}
+                component={Paper}
+            >
+                <Table
+                    sx={{
+                        minWidth: { xs: 300, sm: 500, md: 650 },
+                        '& .MuiTableCell-root': {
+                            px: { xs: 1, sm: 2 },
+                            py: { xs: 1, sm: 1.5 }
+                        }
+                    }}
+                    size={isMobile ? 'small' : 'medium'}
+                    aria-label='responsive table'
+                >
                     <TableHead
                         sx={{
                             backgroundColor: customization.isDarkMode ? theme.palette.common.black : theme.palette.grey[100],
@@ -115,18 +136,44 @@ export const FlowListTable = ({
                         }}
                     >
                         <TableRow>
-                            <StyledTableCell component='th' scope='row' style={{ width: '20%' }} key='0'>
+                            <StyledTableCell
+                                component='th'
+                                scope='row'
+                                sx={{
+                                    width: { xs: '40%', sm: '30%', md: '20%' },
+                                    minWidth: '120px'
+                                }}
+                                key='0'
+                            >
                                 <TableSortLabel active={orderBy === 'name'} direction={order} onClick={() => handleRequestSort('name')}>
                                     Name
                                 </TableSortLabel>
                             </StyledTableCell>
-                            <StyledTableCell style={{ width: '25%' }} key='1'>
+                            <StyledTableCell
+                                sx={{
+                                    width: { xs: '30%', sm: '25%', md: '25%' },
+                                    display: { xs: 'none', sm: 'table-cell' }
+                                }}
+                                key='1'
+                            >
                                 Category
                             </StyledTableCell>
-                            <StyledTableCell style={{ width: '30%' }} key='2'>
+                            <StyledTableCell
+                                sx={{
+                                    width: { xs: '30%', sm: '30%', md: '30%' },
+                                    display: { xs: 'none', md: 'table-cell' }
+                                }}
+                                key='2'
+                            >
                                 Nodes
                             </StyledTableCell>
-                            <StyledTableCell style={{ width: '15%' }} key='3'>
+                            <StyledTableCell
+                                sx={{
+                                    width: { xs: '30%', sm: '25%', md: '15%' },
+                                    minWidth: '100px'
+                                }}
+                                key='3'
+                            >
                                 <TableSortLabel
                                     active={orderBy === 'updatedDate'}
                                     direction={order}
@@ -136,7 +183,13 @@ export const FlowListTable = ({
                                 </TableSortLabel>
                             </StyledTableCell>
                             {isActionsAvailable && (
-                                <StyledTableCell style={{ width: '10%' }} key='4'>
+                                <StyledTableCell
+                                    sx={{
+                                        width: { xs: 'auto', sm: '15%', md: '10%' },
+                                        minWidth: '80px'
+                                    }}
+                                    key='4'
+                                >
                                     Actions
                                 </StyledTableCell>
                             )}
@@ -188,7 +241,12 @@ export const FlowListTable = ({
                             <>
                                 {sortedData.filter(filterFunction).map((row, index) => (
                                     <StyledTableRow key={index}>
-                                        <StyledTableCell key='0'>
+                                        <StyledTableCell
+                                            key='0'
+                                            sx={{
+                                                minWidth: '120px'
+                                            }}
+                                        >
                                             <Tooltip title={row.templateName || row.name}>
                                                 <Typography
                                                     sx={{
@@ -207,7 +265,12 @@ export const FlowListTable = ({
                                                 </Typography>
                                             </Tooltip>
                                         </StyledTableCell>
-                                        <StyledTableCell key='1'>
+                                        <StyledTableCell
+                                            key='1'
+                                            sx={{
+                                                display: { xs: 'none', sm: 'table-cell' }
+                                            }}
+                                        >
                                             <div
                                                 style={{
                                                     display: 'flex',
@@ -225,7 +288,12 @@ export const FlowListTable = ({
                                                         ))}
                                             </div>
                                         </StyledTableCell>
-                                        <StyledTableCell key='2'>
+                                        <StyledTableCell
+                                            key='2'
+                                            sx={{
+                                                display: { xs: 'none', md: 'table-cell' }
+                                            }}
+                                        >
                                             {(images[row.id] || icons[row.id]) && (
                                                 <Box
                                                     sx={{
@@ -314,11 +382,32 @@ export const FlowListTable = ({
                                                 </Box>
                                             )}
                                         </StyledTableCell>
-                                        <StyledTableCell key='3'>
-                                            {moment(row.updatedDate).format('MMMM Do, YYYY HH:mm:ss')}
+                                        <StyledTableCell
+                                            key='3'
+                                            sx={{
+                                                minWidth: '100px'
+                                            }}
+                                        >
+                                            <Typography
+                                                sx={{
+                                                    fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                                                    whiteSpace: 'nowrap',
+                                                    overflow: 'hidden',
+                                                    textOverflow: 'ellipsis'
+                                                }}
+                                            >
+                                                {isMobile
+                                                    ? moment(row.updatedDate).format('MM/DD/YY')
+                                                    : moment(row.updatedDate).format('MMMM Do, YYYY HH:mm:ss')}
+                                            </Typography>
                                         </StyledTableCell>
                                         {isActionsAvailable && (
-                                            <StyledTableCell key='4'>
+                                            <StyledTableCell
+                                                key='4'
+                                                sx={{
+                                                    minWidth: '80px'
+                                                }}
+                                            >
                                                 <Stack
                                                     direction={{ xs: 'column', sm: 'row' }}
                                                     spacing={1}

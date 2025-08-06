@@ -1,11 +1,24 @@
 import { createPortal } from 'react-dom'
 import { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { Dialog, DialogContent, DialogTitle, TableContainer, Table, TableHead, TableRow, TableCell, TableBody, Paper } from '@mui/material'
+import {
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    TableContainer,
+    Table,
+    TableHead,
+    TableRow,
+    TableCell,
+    TableBody,
+    Paper,
+    Box
+} from '@mui/material'
 import moment from 'moment'
 import axios from 'axios'
 import { baseURL } from '@/store/constant'
 import useTranslation from '@/hooks/useTranslation'
+import conectaGPTLogo from '@/assets/images/conectaGPT.png'
 
 const AboutDialog = ({ show, onCancel }) => {
     const portalElement = document.getElementById('portal')
@@ -46,8 +59,19 @@ const AboutDialog = ({ show, onCancel }) => {
             aria-labelledby='alert-dialog-title'
             aria-describedby='alert-dialog-description'
         >
-            <DialogTitle sx={{ fontSize: '1rem' }} id='alert-dialog-title'>
-                {t('app.name')} {t('labels.version')}
+            <DialogTitle sx={{ fontSize: '1rem', textAlign: 'center', pb: 1 }} id='alert-dialog-title'>
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                    <img
+                        src={conectaGPTLogo}
+                        alt='ConectaGPT'
+                        style={{
+                            width: 120,
+                            height: 'auto',
+                            filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.1))'
+                        }}
+                    />
+                    {t('app.name')} {t('labels.version')}
+                </Box>
             </DialogTitle>
             <DialogContent>
                 {data && (

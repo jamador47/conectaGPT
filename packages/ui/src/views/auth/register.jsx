@@ -8,6 +8,7 @@ import { Alert, Box, Button, Divider, Icon, List, ListItemText, OutlinedInput, S
 // project imports
 import { StyledButton } from '@/ui-component/button/StyledButton'
 import { Input } from '@/ui-component/input/Input'
+import Logo from '@/ui-component/extended/Logo'
 import { BackdropLoader } from '@/ui-component/loading/BackdropLoader'
 
 // API
@@ -257,10 +258,23 @@ const RegisterPage = () => {
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    padding: '24px'
+                    padding: { xs: '16px', sm: '24px' },
+                    minHeight: '100vh',
+                    justifyContent: 'center'
                 }}
             >
-                <Stack flexDirection='column' sx={{ width: '480px', gap: 3 }}>
+                <Stack
+                    flexDirection='column'
+                    sx={{
+                        width: { xs: '100%', sm: '400px', md: '480px' },
+                        maxWidth: '480px',
+                        gap: 3
+                    }}
+                >
+                    {/* ConectaGPT Logo */}
+                    <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+                        <Logo />
+                    </Box>
                     {authError && (
                         <Alert icon={<IconExclamationCircle />} variant='filled' severity='error'>
                             {authError.split(', ').length > 0 ? (

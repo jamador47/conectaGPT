@@ -86,7 +86,7 @@ const GitHubStarButton = ({ starCount, isDark }) => {
     const formattedStarCount = starCount.toLocaleString()
 
     return (
-        <Link href='https://github.com/FlowiseAI/Flowise' target='_blank' underline='none' sx={{ display: 'inline-flex' }}>
+        <Link href='https://github.com/jamador47/conectaGPT' target='_blank' underline='none' sx={{ display: 'inline-flex' }}>
             <Box
                 sx={{
                     display: 'flex',
@@ -199,7 +199,7 @@ const Header = ({ handleLeftDrawerToggle }) => {
         if (isCloud || isOpenSource) {
             const fetchStarCount = async () => {
                 try {
-                    const response = await fetch('https://api.github.com/repos/FlowiseAI/Flowise')
+                    const response = await fetch('https://api.github.com/repos/jamador47/conectaGPT')
                     const data = await response.json()
                     if (data.stargazers_count) {
                         setStarCount(data.stargazers_count)
@@ -220,7 +220,12 @@ const Header = ({ handleLeftDrawerToggle }) => {
                     width: 228,
                     display: 'flex',
                     [theme.breakpoints.down('md')]: {
-                        width: 'auto'
+                        width: 'auto',
+                        minWidth: 'fit-content'
+                    },
+                    [theme.breakpoints.down('sm')]: {
+                        width: 'auto',
+                        flex: '0 0 auto'
                     }
                 }}
             >
@@ -254,12 +259,16 @@ const Header = ({ handleLeftDrawerToggle }) => {
                 <Box
                     sx={{
                         flexGrow: 1,
-                        px: 4,
+                        px: { xs: 1, sm: 2, md: 4 },
                         display: 'flex',
                         alignItems: 'center',
+                        justifyContent: { xs: 'flex-end', md: 'flex-start' },
                         '& span': {
                             display: 'flex',
                             alignItems: 'center'
+                        },
+                        [theme.breakpoints.down('sm')]: {
+                            display: 'none'
                         }
                     }}
                 >
@@ -274,9 +283,12 @@ const Header = ({ handleLeftDrawerToggle }) => {
                 <Button
                     variant='contained'
                     sx={{
-                        mr: 1,
-                        ml: 2,
+                        mr: { xs: 0.5, sm: 1 },
+                        ml: { xs: 1, sm: 2 },
                         borderRadius: 15,
+                        fontSize: { xs: '0.75rem', sm: '0.875rem' },
+                        px: { xs: 1, sm: 2 },
+                        minWidth: { xs: 'auto', sm: '64px' },
                         background: (theme) =>
                             `linear-gradient(90deg, ${theme.palette.primary.main} 10%, ${theme.palette.secondary.main} 100%)`,
                         color: (theme) => theme.palette.secondary.contrastText,

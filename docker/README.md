@@ -1,6 +1,10 @@
-# Flowise Docker Hub Image
+<p align="center">
+<img width="300" src="../packages/ui/src/assets/images/conectaGPT.png" alt="ConectaGPT Docker">
+</p>
 
-Starts Flowise from [DockerHub Image](https://hub.docker.com/r/flowiseai/flowise)
+# ConectaGPT Docker Image
+
+Starts ConectaGPT using Docker containerization.
 
 ## Usage
 

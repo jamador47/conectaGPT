@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router-dom'
 import { closeSnackbar as closeSnackbarAction, enqueueSnackbar as enqueueSnackbarAction, REMOVE_DIRTY } from '@/store/actions'
 import { exportData, stringify } from '@/utils/exportImport'
 import useNotifier from '@/utils/useNotifier'
-import { useTranslation } from '@/hooks/useTranslation'
 
 // material-ui
 import {
@@ -214,7 +213,6 @@ ImportDialog.propTypes = {
 
 const ProfileSection = ({ handleLogout }) => {
     const theme = useTheme()
-    const { t } = useTranslation()
 
     const customization = useSelector((state) => state.customization)
     const { isCloud } = useConfig()

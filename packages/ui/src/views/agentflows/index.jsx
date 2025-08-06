@@ -8,6 +8,7 @@ import { useTheme } from '@mui/material/styles'
 // project imports
 import MainCard from '@/ui-component/cards/MainCard'
 import ItemCard from '@/ui-component/cards/ItemCard'
+import ResponsiveGrid from '@/ui-component/grid/ResponsiveGrid'
 import { gridSpacing } from '@/store/constant'
 import AgentsEmptySVG from '@/assets/images/agents_empty.svg'
 import ConfirmDialog from '@/ui-component/dialog/ConfirmDialog'
@@ -255,7 +256,7 @@ const Agentflows = () => {
                     {!isLoading && total > 0 && (
                         <>
                             {!view || view === 'card' ? (
-                                <Box display='grid' gridTemplateColumns='repeat(3, 1fr)' gap={gridSpacing}>
+                                <ResponsiveGrid spacing={gridSpacing} maxColumns={{ xs: 1, sm: 2, md: 3, lg: 4 }}>
                                     {getAllAgentflows.data?.data.filter(filterFlows).map((data, index) => (
                                         <ItemCard
                                             key={index}
@@ -265,7 +266,7 @@ const Agentflows = () => {
                                             icons={icons[data.id]}
                                         />
                                     ))}
-                                </Box>
+                                </ResponsiveGrid>
                             ) : (
                                 <FlowListTable
                                     isAgentCanvas={true}

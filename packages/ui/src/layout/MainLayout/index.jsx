@@ -29,15 +29,15 @@ const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({
             width: `calc(100% - ${drawerWidth}px)`
         },
         [theme.breakpoints.down('md')]: {
-            marginLeft: '20px',
-            width: `calc(100% - ${drawerWidth}px)`,
-            padding: '16px'
+            marginLeft: '0px',
+            width: '100%',
+            padding: '16px 20px'
         },
         [theme.breakpoints.down('sm')]: {
-            marginLeft: '10px',
-            width: `calc(100% - ${drawerWidth}px)`,
-            padding: '16px',
-            marginRight: '10px'
+            marginLeft: '0px',
+            width: '100%',
+            padding: '12px 16px',
+            marginRight: '0px'
         }
     }),
     ...(open && {
@@ -86,7 +86,15 @@ const MainLayout = () => {
                     transition: leftDrawerOpened ? theme.transitions.create('width') : 'none'
                 }}
             >
-                <Toolbar sx={{ height: `${headerHeight}px`, borderBottom: '1px solid', borderColor: theme.palette.grey[900] + 25 }}>
+                <Toolbar
+                    sx={{
+                        height: `${headerHeight}px`,
+                        borderBottom: '1px solid',
+                        borderColor: theme.palette.grey[900] + 25,
+                        minHeight: { xs: '56px', sm: `${headerHeight}px` },
+                        px: { xs: 1, sm: 2, md: 3 }
+                    }}
+                >
                     <Header handleLeftDrawerToggle={handleLeftDrawerToggle} />
                 </Toolbar>
             </AppBar>

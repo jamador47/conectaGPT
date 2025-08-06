@@ -877,7 +877,7 @@ const AccountSettings = () => {
                                                     Loading
                                                 </Box>
                                             ) : (
-                                                {t('messages.send_instructions')}
+                                                t('messages.send_instructions')
                                             )}
                                         </Button>
                                     </Box>

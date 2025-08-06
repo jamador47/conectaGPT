@@ -1,8 +1,7 @@
 <!-- markdownlint-disable MD030 -->
 
 <p align="center">
-<img src="./packages/ui/src/assets/images/conectagpt_white.svg#gh-light-mode-only">
-<img src="./packages/ui/src/assets/images/conectagpt_dark.svg#gh-dark-mode-only">
+<img width="400" src="./packages/ui/src/assets/images/conectaGPT.png" alt="ConectaGPT - Construye Agentes de IA, Visualmente">
 </p>
 
 <div align="center">
@@ -24,53 +23,59 @@
 ### 🎯 Nuestra Misión
 
 Democratizar el acceso a la inteligencia artificial mediante:
-- **Interfaz completamente en español**: Navegación, configuración y documentación
-- **Experiencia simplificada**: Diseñado para usuarios sin conocimientos técnicos avanzados
-- **Comunidad hispanohablante**: Soporte y recursos en español
-- **Accesibilidad**: Eliminando barreras idiomáticas y técnicas
+
+-   **Interfaz completamente en español**: Navegación, configuración y documentación
+-   **Experiencia simplificada**: Diseñado para usuarios sin conocimientos técnicos avanzados
+-   **Comunidad hispanohablante**: Soporte y recursos en español
+-   **Accesibilidad**: Eliminando barreras idiomáticas y técnicas
 
 ### 🚀 ¿Qué es ConectaGPT?
 
 ConectaGPT es una plataforma visual que te permite construir y gestionar agentes de IA sin necesidad de programar. Con una interfaz intuitiva de arrastrar y soltar, puedes:
 
-- 🤖 Crear chatbots inteligentes
-- 🔗 Conectar múltiples servicios de IA
-- 📚 Procesar documentos y bases de conocimiento
-- 🛠️ Integrar herramientas especializadas
-- 📊 Monitorear y analizar conversaciones
+-   🤖 Crear chatbots inteligentes
+-   🔗 Conectar múltiples servicios de IA
+-   📚 Procesar documentos y bases de conocimiento
+-   🛠️ Integrar herramientas especializadas
+-   📊 Monitorear y analizar conversaciones
+
 ## 📚 Tabla de Contenidos
 
-- [⚡ Inicio Rápido](#-inicio-rápido)
-- [🐳 Docker](#-docker)
-- [👨‍💻 Desarrolladores](#-desarrolladores)
-- [🌱 Variables de Entorno](#-variables-de-entorno)
-- [📖 Documentación](#-documentación)
-- [🌐 Auto-hosting](#-auto-hosting)
-- [🙋 Soporte](#-soporte)
-- [🙌 Contribuir](#-contribuir)
-- [📄 Licencia](#-licencia)
+-   [⚡ Inicio Rápido](#-inicio-rápido)
+-   [🐳 Docker](#-docker)
+-   [👨‍💻 Desarrolladores](#-desarrolladores)
+-   [🌱 Variables de Entorno](#-variables-de-entorno)
+-   [📖 Documentación](#-documentación)
+-   [🌐 Auto-hosting](#-auto-hosting)
+-   [🙋 Soporte](#-soporte)
+-   [🙌 Contribuir](#-contribuir)
+-   [📄 Licencia](#-licencia)
 
 ## ⚡ Inicio Rápido
 
 Descarga e instala [NodeJS](https://nodejs.org/es/download) >= 18.15.0
 
 1. Clona el repositorio de ConectaGPT
+
     ```bash
     git clone https://github.com/tu-usuario/conectaGPT.git
     cd conectaGPT
     ```
 
 2. Instala las dependencias
+
     ```bash
     pnpm install
     ```
 
 3. Construye el proyecto
+
     ```bash
     pnpm build
     ```
 
 4. Inicia ConectaGPT
+
     ```bash
     pnpm start
     ```
@@ -91,18 +96,19 @@ Descarga e instala [NodeJS](https://nodejs.org/es/download) >= 18.15.0
 ### Imagen Docker
 
 1. Construye la imagen localmente:
-   
+
     ```bash
     docker build --no-cache -t conectagpt .
     ```
+
 2. Ejecuta la imagen:
-   
+
     ```bash
     docker run -d --name conectagpt -p 3000:3000 conectagpt
     ```
 
 3. Detén la imagen:
-   
+
     ```bash
     docker stop conectagpt
     ```

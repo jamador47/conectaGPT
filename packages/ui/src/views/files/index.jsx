@@ -5,7 +5,7 @@ import { Box, Button, Stack } from '@mui/material'
 
 // project imports
 import MainCard from '@/ui-component/cards/MainCard'
-import WorkflowEmptySVG from '@/assets/images/workflow_empty.svg'
+import ConectaGPTCompu from '@/assets/images/ConectaGPT-compu.png'
 import ViewHeader from '@/layout/MainLayout/ViewHeader'
 import ErrorBoundary from '@/ErrorBoundary'
 import { FilesTable } from '@/ui-component/table/FilesTable'
@@ -134,8 +134,8 @@ const Files = () => {
                             <Box sx={{ p: 2, height: 'auto' }}>
                                 <img
                                     style={{ objectFit: 'cover', height: '25vh', width: 'auto' }}
-                                    src={WorkflowEmptySVG}
-                                    alt='WorkflowEmptySVG'
+                                    src={ConectaGPTCompu}
+                                    alt='ConectaGPT Computer'
                                 />
                             </Box>
                             <div>No Files Yet</div>

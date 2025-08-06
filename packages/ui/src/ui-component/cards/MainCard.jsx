@@ -41,7 +41,11 @@ const MainCard = forwardRef(function MainCard(
                 ':hover': {
                     boxShadow: boxShadow ? shadow || '0 2px 14px 0 rgb(32 40 45 / 8%)' : 'inherit'
                 },
-                maxWidth: maxWidth === 'sm' ? '800px' : maxWidth === 'md' ? '960px' : '1280px',
+                maxWidth: {
+                    xs: '100%',
+                    sm: maxWidth === 'sm' ? '800px' : maxWidth === 'md' ? '960px' : '1280px',
+                    md: maxWidth === 'sm' ? '800px' : maxWidth === 'md' ? '960px' : '1280px'
+                },
                 mx: 'auto',
                 ...sx
             }}

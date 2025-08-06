@@ -8,8 +8,9 @@ import { useTheme } from '@mui/material/styles'
 // project imports
 import MainCard from '@/ui-component/cards/MainCard'
 import ItemCard from '@/ui-component/cards/ItemCard'
+import ResponsiveGrid from '@/ui-component/grid/ResponsiveGrid'
 import { gridSpacing } from '@/store/constant'
-import WorkflowEmptySVG from '@/assets/images/workflow_empty.svg'
+import ConectaGPTCompu from '@/assets/images/ConectaGPT-compu.png'
 import ConfirmDialog from '@/ui-component/dialog/ConfirmDialog'
 import { FlowListTable } from '@/ui-component/table/FlowListTable'
 import { StyledPermissionButton } from '@/ui-component/button/RBACButtons'
@@ -188,20 +189,20 @@ const Chatflows = () => {
                     </ViewHeader>
 
                     {isLoading && (
-                        <Box display='grid' gridTemplateColumns='repeat(3, 1fr)' gap={gridSpacing}>
+                        <ResponsiveGrid spacing={gridSpacing} maxColumns={{ xs: 1, sm: 2, md: 3, lg: 4 }}>
                             <Skeleton variant='rounded' height={160} />
                             <Skeleton variant='rounded' height={160} />
                             <Skeleton variant='rounded' height={160} />
-                        </Box>
+                        </ResponsiveGrid>
                     )}
                     {!isLoading && total > 0 && (
                         <>
                             {!view || view === 'card' ? (
-                                <Box display='grid' gridTemplateColumns='repeat(3, 1fr)' gap={gridSpacing}>
+                                <ResponsiveGrid spacing={gridSpacing} maxColumns={{ xs: 1, sm: 2, md: 3, lg: 4 }}>
                                     {getAllChatflowsApi.data?.data?.filter(filterFlows).map((data, index) => (
                                         <ItemCard key={index} onClick={() => goToCanvas(data)} data={data} images={images[data.id]} />
                                     ))}
-                                </Box>
+                                </ResponsiveGrid>
                             ) : (
                                 <FlowListTable
                                     data={getAllChatflowsApi.data?.data}
@@ -221,8 +222,8 @@ const Chatflows = () => {
                             <Box sx={{ p: 2, height: 'auto' }}>
                                 <img
                                     style={{ objectFit: 'cover', height: '25vh', width: 'auto' }}
-                                    src={WorkflowEmptySVG}
-                                    alt='WorkflowEmptySVG'
+                                    src={ConectaGPTCompu}
+                                    alt='ConectaGPT Computer'
                                 />
                             </Box>
                             <div>{t('chatflows.empty_state')}</div>

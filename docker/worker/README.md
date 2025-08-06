@@ -1,6 +1,10 @@
-# Flowise Worker
+<p align="center">
+<img width="250" src="../../packages/ui/src/assets/images/conectaGPT.png" alt="ConectaGPT Worker">
+</p>
 
-By utilizing worker instances when operating in queue mode, Flowise can be scaled horizontally by adding more workers to handle increased workloads or scaled down by removing workers when demand decreases.
+# ConectaGPT Worker
+
+By utilizing worker instances when operating in queue mode, ConectaGPT can be scaled horizontally by adding more workers to handle increased workloads or scaled down by removing workers when demand decreases.
 
 Here’s an overview of the process:
 

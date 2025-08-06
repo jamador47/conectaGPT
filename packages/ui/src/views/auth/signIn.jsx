@@ -9,6 +9,7 @@ import { LoadingButton } from '@mui/lab'
 
 // project imports
 import MainCard from '@/ui-component/cards/MainCard'
+import Logo from '@/ui-component/extended/Logo'
 import { Input } from '@/ui-component/input/Input'
 
 // Hooks
@@ -175,7 +176,18 @@ const SignInPage = () => {
     return (
         <>
             <MainCard maxWidth='sm'>
-                <Stack flexDirection='column' sx={{ width: '480px', gap: 3 }}>
+                <Stack
+                    flexDirection='column'
+                    sx={{
+                        width: { xs: '100%', sm: '400px', md: '480px' },
+                        maxWidth: '480px',
+                        gap: 3
+                    }}
+                >
+                    {/* ConectaGPT Logo */}
+                    <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
+                        <Logo />
+                    </Box>
                     {successMessage && (
                         <Alert variant='filled' severity='success' onClose={() => setSuccessMessage('')}>
                             {successMessage}
@@ -219,7 +231,8 @@ const SignInPage = () => {
                             <Box sx={{ p: 0 }}>
                                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                                     <Typography>
-                                        {t('auth.email')}<span style={{ color: 'red' }}>&nbsp;*</span>
+                                        {t('auth.email')}
+                                        <span style={{ color: 'red' }}>&nbsp;*</span>
                                     </Typography>
                                     <div style={{ flexGrow: 1 }}></div>
                                 </div>
@@ -233,7 +246,8 @@ const SignInPage = () => {
                             <Box sx={{ p: 0 }}>
                                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                                     <Typography>
-                                        {t('auth.password')}<span style={{ color: 'red' }}>&nbsp;*</span>
+                                        {t('auth.password')}
+                                        <span style={{ color: 'red' }}>&nbsp;*</span>
                                     </Typography>
                                     <div style={{ flexGrow: 1 }}></div>
                                 </div>
@@ -264,7 +278,9 @@ const SignInPage = () => {
                             >
                                 {t('auth.login')}
                             </LoadingButton>
-                            {configuredSsoProviders && configuredSsoProviders.length > 0 && <Divider sx={{ width: '100%' }}>{t('auth.or')}</Divider>}
+                            {configuredSsoProviders && configuredSsoProviders.length > 0 && (
+                                <Divider sx={{ width: '100%' }}>{t('auth.or')}</Divider>
+                            )}
                             {configuredSsoProviders &&
                                 configuredSsoProviders.map(
                                     (ssoProvider) =>
